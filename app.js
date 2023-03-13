@@ -1,13 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const playerRouter = require('./routes/playerRoutes')
-const userRouter = require('./routes/userRoutes')
+const playerRouter = require('./routes/playerRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
 // 1) MIDDELWARES
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
-app.use('/api/v1/players', playerRouter)
-app.use('/api/v1/users', userRouter)
+app.use('/api/v1/players', playerRouter);
+app.use('/api/v1/users', userRouter);
 
-module.exports = app
+module.exports = app;
