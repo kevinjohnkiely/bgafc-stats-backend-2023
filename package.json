@@ -1,0 +1,18 @@
+{
+  "name": "bgafc-stats-backend-2023",
+  "version": "1.0.0",
+  "description": "A NodeJS backend application for Ballingarry AFC player stats",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinjohnkiely/bgafc-stats-backend-2023"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin John Kiely",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
