@@ -46,50 +46,53 @@ const deletePlayer = (req, res) => {
 const getAllUsers = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined'
-  })
-}
+    message: 'This route is not yet defined',
+  });
+};
 const createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined'
-  })
-}
+    message: 'This route is not yet defined',
+  });
+};
 
 const getOneUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined'
-  })
-}
+    message: 'This route is not yet defined',
+  });
+};
 
 const updateUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined'
-  })
-}
+    message: 'This route is not yet defined',
+  });
+};
 
 const deleteUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined'
-  })
-}
+    message: 'This route is not yet defined',
+  });
+};
 
-app.route('/api/v1/players').get(getAllPlayers).post(createPlayer);
-app
-  .route('/api/v1/players/:playerSlug')
+// ROUTES
+const playerRouter = express.Router();
+app.use('/api/v1/players', playerRouter);
+
+playerRouter.route('/').get(getAllPlayers).post(createPlayer);
+playerRouter
+  .route('/:playerSlug')
   .get(getOnePlayer)
   .patch(updatePlayer)
   .delete(deletePlayer);
 
-app.route('/api/v1/users').get(getAllUsers).post(createUser);
-app
-  .route('/api/v1/users/:id')
-  .get(getOneUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+const userRouter = express.Router();
+app.use('/api/v1/users', userRouter);
+
+userRouter.route('/').get(getAllUsers).post(createUser);
+userRouter.route('/:id').get(getOneUser).patch(updateUser).delete(deleteUser);
 
 const port = 1984;
 app.listen(port, () => {
