@@ -6,7 +6,7 @@ const {
   getOnePlayer,
   updatePlayer,
   deletePlayer,
-} = require('./../controllers/playerController');
+} = require('../controllers/playerController');
 
 const router = express.Router();
 
