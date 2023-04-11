@@ -8,11 +8,13 @@ const playerSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: [true, 'A Player must have a first name!'],
+    maxlength: [25, 'A Players first name must be 25 characters or less!'],
   },
   lastName: {
     type: String,
     trim: true,
     required: [true, 'A Player must have a last name!'],
+    maxlength: [25, 'A Players last name must be 25 characters or less!'],
   },
   slug: {
     type: String,
@@ -23,18 +25,22 @@ const playerSchema = new mongoose.Schema({
   dateOfBirth: {
     type: String,
     trim: true,
+    maxlength: [15, 'A Players date of birth must be 15 characters or less!'],
   },
   position: {
     type: String,
     trim: true,
+    maxlength: [15, 'A Players position must be 15 characters or less!'],
   },
   debut: {
     type: String,
     trim: true,
+    maxlength: [150, 'A Players debut must be 150 characters or less!'],
   },
   firstGoal: {
     type: String,
     trim: true,
+    maxlength: [150, 'A Players first goal must be 150 characters or less!'],
   },
   honours: {
     type: String,
