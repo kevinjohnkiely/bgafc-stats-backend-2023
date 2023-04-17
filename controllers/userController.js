@@ -37,6 +37,17 @@ exports.deleteUser = (req, res) => {
   });
 };
 
+exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
+  const authUserID = req.session.userId;
+
+  if(!authUserID) {
+    return next(new AppError('User not authenticated', 401));
+  }
+
+  const user = await User.findById(authUserID)
+  
+});
+
 exports.signUp = catchAsyncErrors(async (req, res, next) => {
   const { username } = req.body;
   const passwordRaw = req.body.password;
@@ -56,10 +67,42 @@ exports.signUp = catchAsyncErrors(async (req, res, next) => {
     password: hashedPassword,
   });
 
+  req.session.userId = newUser._id;
+
   res.status(201).json({
     status: 'success',
     data: {
       user: newUser,
+    },
+  });
+});
+
+exports.login = catchAsyncErrors(async (req, res, next) => {
+  const { username } = req.body;
+  const { password } = req.body;
+
+  if (!username || !password) {
+    return next(new AppError('Parameters missing! Try again...', 400));
+  }
+
+  const user = await User.findOne({ username: username }).select(
+    '+password +email'
+  );
+
+  if (!user) {
+    return next(new AppError('Invalid login credentials! Try again...', 401));
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return next(new AppError('Invalid login credentials! Try again...', 401));
+  }
+
+  req.session.userId = user._id;
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user: user,
     },
   });
 });

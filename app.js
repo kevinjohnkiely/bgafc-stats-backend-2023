@@ -1,6 +1,8 @@
 const express = require('express');
-const morgan = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
+const morgan = require('morgan');
 const AppError = require('./utils/errorHandling/appError');
 const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 
@@ -9,6 +11,26 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 app.use(express.json());
+
+const DB = process.env.DATABASE.replace(
+  '<THE_PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60 * 60 * 100,
+    },
+    rolling: true,
+    store: MongoStore.create({
+      mongoUrl: DB,
+    }),
+  })
+);
 
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
