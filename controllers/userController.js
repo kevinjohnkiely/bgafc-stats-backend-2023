@@ -6,46 +6,51 @@ const AppError = require('../utils/errorHandling/appError');
 exports.getAllUsers = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined',
+    message: 'This route is not yet defined 1',
   });
 };
 exports.createUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined',
+    message: 'This route is not yet defined 2',
   });
 };
 
 exports.getOneUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined',
+    message: 'This route is not yet defined 3',
   });
 };
 
 exports.updateUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined',
+    message: 'This route is not yet defined 4',
   });
 };
 
 exports.deleteUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined',
+    message: 'This route is not yet defined 5',
   });
 };
 
 exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
   const authUserID = req.session.userId;
 
-  if(!authUserID) {
+  if (!authUserID) {
     return next(new AppError('User not authenticated', 401));
   }
 
-  const user = await User.findById(authUserID)
-  
+  const loggedInUser = await User.findById(authUserID);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: loggedInUser,
+    },
+  });
 });
 
 exports.signUp = catchAsyncErrors(async (req, res, next) => {
@@ -85,9 +90,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
     return next(new AppError('Parameters missing! Try again...', 400));
   }
 
-  const user = await User.findOne({ username: username }).select(
-    '+password +email'
-  );
+  const user = await User.findOne({ username: username }).select('+password');
 
   if (!user) {
     return next(new AppError('Invalid login credentials! Try again...', 401));
@@ -97,12 +100,21 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!passwordMatch) {
     return next(new AppError('Invalid login credentials! Try again...', 401));
   }
-
+  //all ok, establish session
   req.session.userId = user._id;
   res.status(201).json({
     status: 'success',
     data: {
       user: user,
     },
+  });
+});
+
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  req.session.destroy((error) => {
+    if (error) {
+      return next(new AppError('Failed to log out! Try again...', 401));
+    }
+    res.sendStatus(200);
   });
 });
