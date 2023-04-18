@@ -3,9 +3,6 @@ const express = require('express');
 const {
   getAllUsers,
   createUser,
-  // getOneUser,
-  // updateUser,
-  // deleteUser,
   signUp,
   login,
   getAuthUser,

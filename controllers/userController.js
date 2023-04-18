@@ -38,13 +38,7 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
-  const authUserID = req.session.userId;
-
-  if (!authUserID) {
-    return next(new AppError('User not authenticated', 401));
-  }
-
-  const loggedInUser = await User.findById(authUserID);
+  const loggedInUser = await User.findById(req.session.userId);
   res.status(200).json({
     status: 'success',
     data: {
