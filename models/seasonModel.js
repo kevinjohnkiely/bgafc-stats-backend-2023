@@ -92,6 +92,14 @@ const seasonSchema = new mongoose.Schema(
   }
 );
 
+// seasonSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'player',
+//     select: 'firstName lastName',
+//   });
+//   next();
+// });
+
 const Season = mongoose.model('Season', seasonSchema);
 
 module.exports = Season;

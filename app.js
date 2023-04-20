@@ -13,6 +13,7 @@ const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 
 const playerRouter = require('./routes/playerRoutes');
 const userRouter = require('./routes/userRoutes');
+const seasonRouter = require('./routes/seasonRoutes');
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.use(hpp());
 
 // LIMITS REQUESTS FROM API
 const limiter = rateLimit({
-  max: 3,
+  max: 50,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP. Please try again in an hour!',
 });
@@ -67,9 +68,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 // app.use(express.static(`${__dirname}/public`))
 
-// ROUTES
+// MOUNTING THE ROUTES
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/seasons', seasonRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));

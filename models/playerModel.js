@@ -73,6 +73,13 @@ const playerSchema = new mongoose.Schema(
   }
 );
 
+// Virtual populate
+playerSchema.virtual('seasons', {
+  ref: 'Season',
+  foreignField: 'player',
+  localField: '_id',
+});
+
 const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;

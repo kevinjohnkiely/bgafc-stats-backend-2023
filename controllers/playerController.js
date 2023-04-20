@@ -15,7 +15,9 @@ exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
 
 exports.getOnePlayer = catchAsyncErrors(async (req, res, next) => {
   /*!! CHANGE THIS BACK FOR MY VERSION !! */
-  const player = await Player.findOne({ slug: req.params.playerSlug });
+  const player = await Player.findOne({ slug: req.params.playerSlug }).populate(
+    'seasons'
+  );
   // const player = await Player.findById(req.params.playerSlug);
 
   if (!player) {
