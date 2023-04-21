@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Player = require('./playerModel');
 
 const seasonSchema = new mongoose.Schema(
   {
@@ -80,6 +81,12 @@ const seasonSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    seasonTotalApps: {
+      type: Number,
+    },
+    seasonTotalGoals: {
+      type: Number,
+    },
     player: {
       type: mongoose.Schema.ObjectId,
       ref: 'Player',
@@ -91,6 +98,75 @@ const seasonSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+// Convulated code to add season totals and player totals in one fell swoop!
+seasonSchema.statics.calcPlayerCareerTotals = async function (playerId) {
+  const stats = await this.aggregate([
+    {
+      $match: { player: playerId },
+    },
+    {
+      $group: {
+        _id: '$player',
+        totalApps: { $sum: '$seasonTotalApps' },
+        totalGoals: { $sum: '$seasonTotalGoals' },
+      },
+    },
+  ]);
+
+  if (stats.length > 0) {
+    await Player.findByIdAndUpdate(playerId, {
+      aTeamApps: stats[0].totalApps,
+      aTeamGoals: stats[0].totalGoals,
+    });
+  } else {
+    await Player.findByIdAndUpdate(playerId, {
+      aTeamApps: 0,
+      aTeamGoals: 0,
+    });
+  }
+};
+
+seasonSchema.pre('save', function (next) {
+  this.seasonTotalApps =
+    this.lge_apps +
+    this.fai_apps +
+    this.mjc_apps +
+    this.msc_apps +
+    this.desc_apps +
+    this.lgec_apps +
+    this.reidyc_apps +
+    this.hoganc_apps;
+
+  this.seasonTotalGoals =
+    this.lge_goals +
+    this.fai_goals +
+    this.mjc_goals +
+    this.msc_goals +
+    this.desc_goals +
+    this.lgec_goals +
+    this.reidyc_goals +
+    this.hoganc_goals;
+
+  next();
+});
+
+seasonSchema.post('save', function () {
+  // this points to current season
+  this.constructor.calcPlayerCareerTotals(this.player);
+});
+
+// findByIdAndUpdate
+// findByIdAndDelete
+seasonSchema.pre(/^findOneAnd/, async function (next) {
+  this.ss = await this.findOne();
+  next();
+});
+
+seasonSchema.post(/^findOneAnd/, async function () {
+  // await this.findOne(); does NOT work here, query has already executed
+  await this.ss.constructor.calcPlayerCareerTotals(this.ss.player);
+});
 
 const Season = mongoose.model('Season', seasonSchema);
 
