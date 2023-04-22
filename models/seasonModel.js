@@ -81,10 +81,16 @@ const seasonSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    seasonTotalApps: {
+    seasonTotalAppsA: {
       type: Number,
     },
-    seasonTotalGoals: {
+    seasonTotalGoalsA: {
+      type: Number,
+    },
+    seasonTotalAppsB: {
+      type: Number,
+    },
+    seasonTotalGoalsB: {
       type: Number,
     },
     player: {
@@ -108,45 +114,75 @@ seasonSchema.statics.calcPlayerCareerTotals = async function (playerId) {
     {
       $group: {
         _id: '$player',
-        totalApps: { $sum: '$seasonTotalApps' },
-        totalGoals: { $sum: '$seasonTotalGoals' },
+        totalAppsA: { $sum: '$seasonTotalAppsA' },
+        totalGoalsA: { $sum: '$seasonTotalGoalsA' },
+        totalAppsB: { $sum: '$seasonTotalAppsB' },
+        totalGoalsB: { $sum: '$seasonTotalGoalsB' },
       },
     },
   ]);
 
   if (stats.length > 0) {
     await Player.findByIdAndUpdate(playerId, {
-      aTeamApps: stats[0].totalApps,
-      aTeamGoals: stats[0].totalGoals,
+      aTeamApps: stats[0].totalAppsA,
+      aTeamGoals: stats[0].totalGoalsA,
+      bTeamApps: stats[0].totalAppsB,
+      bTeamGoals: stats[0].totalGoalsB,
     });
   } else {
     await Player.findByIdAndUpdate(playerId, {
       aTeamApps: 0,
       aTeamGoals: 0,
+      bTeamApps: 0,
+      bTeamGoals: 0,
     });
   }
 };
 
 seasonSchema.pre('save', function (next) {
-  this.seasonTotalApps =
-    this.lge_apps +
-    this.fai_apps +
-    this.mjc_apps +
-    this.msc_apps +
-    this.desc_apps +
-    this.lgec_apps +
-    this.reidyc_apps +
-    this.hoganc_apps;
+  if (this.team === 'A') {
+    console.log('A team');
+    this.seasonTotalAppsA =
+      this.lge_apps +
+      this.fai_apps +
+      this.mjc_apps +
+      this.msc_apps +
+      this.desc_apps +
+      this.lgec_apps +
+      this.reidyc_apps +
+      this.hoganc_apps;
 
-  this.seasonTotalGoals =
-    this.lge_goals +
-    this.fai_goals +
-    this.mjc_goals +
-    this.msc_goals +
-    this.desc_goals +
-    this.lgec_goals +
-    this.reidyc_goals +
-    this.hoganc_goals;
+    this.seasonTotalGoalsA =
+      this.lge_goals +
+      this.fai_goals +
+      this.mjc_goals +
+      this.msc_goals +
+      this.desc_goals +
+      this.lgec_goals +
+      this.reidyc_goals +
+      this.hoganc_goals;
+  } else {
+    console.log(' Bteam');
+    this.seasonTotalAppsB =
+      this.lge_apps +
+      this.fai_apps +
+      this.mjc_apps +
+      this.msc_apps +
+      this.desc_apps +
+      this.lgec_apps +
+      this.reidyc_apps +
+      this.hoganc_apps;
+
+    this.seasonTotalGoalsB =
+      this.lge_goals +
+      this.fai_goals +
+      this.mjc_goals +
+      this.msc_goals +
+      this.desc_goals +
+      this.lgec_goals +
+      this.reidyc_goals +
+      this.hoganc_goals;
+  }
 
   next();
 });
