@@ -51,7 +51,7 @@ exports.createPlayer = catchAsyncErrors(async (req, res, next) => {
 
 exports.updatePlayer = catchAsyncErrors(async (req, res, next) => {
   const playerToUpdate = await Player.findOneAndUpdate(
-    { slug: req.params.slug },
+    { slug: req.params.playerSlug },
     req.body,
     { new: true, runValidators: true }
   );
@@ -72,8 +72,10 @@ exports.updatePlayer = catchAsyncErrors(async (req, res, next) => {
 
 exports.deletePlayer = catchAsyncErrors(async (req, res, next) => {
   const playerToDelete = await Player.findOneAndDelete({
-    slug: req.params.slug,
+    slug: req.params.playerSlug,
   });
+  console.log(req.params.slug);
+  console.log(playerToDelete);
 
   if (!playerToDelete) {
     return next(new AppError('That Player does not exist!', 404));

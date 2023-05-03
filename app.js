@@ -52,7 +52,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 60 * 60 * 100,
+      maxAge: 60 * 60 * 1000,
     },
     rolling: true,
     store: MongoStore.create({
