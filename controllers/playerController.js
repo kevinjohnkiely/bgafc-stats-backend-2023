@@ -74,8 +74,6 @@ exports.deletePlayer = catchAsyncErrors(async (req, res, next) => {
   const playerToDelete = await Player.findOneAndDelete({
     slug: req.params.playerSlug,
   });
-  console.log(req.params.slug);
-  console.log(playerToDelete);
 
   if (!playerToDelete) {
     return next(new AppError('That Player does not exist!', 404));
