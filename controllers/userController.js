@@ -39,6 +39,7 @@ exports.deleteUser = (req, res) => {
 
 exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
   const loggedInUser = await User.findById(req.session.userId);
+  console.log(loggedInUser);
   res.status(200).json({
     status: 'success',
     data: {
