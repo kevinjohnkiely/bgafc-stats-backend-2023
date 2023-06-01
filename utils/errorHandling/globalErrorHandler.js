@@ -11,6 +11,11 @@ const handleValidationDB = (err) => {
   return new AppError(message, 400);
 };
 
+const handleDuplicateSlug = () => {
+  const message = 'Player slug already exists, please choose another';
+  return new AppError(message, 400);
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -53,6 +58,7 @@ module.exports = (err, req, res, next) => {
     let error = Object.assign(err);
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.name === 'ValidationError') error = handleValidationDB(error);
+    if (error.codeName === 'DuplicateKey') error = handleDuplicateSlug(error);
 
     sendErrorProd(error, res);
   }

@@ -21,6 +21,7 @@ router
   .route('/:playerSlug')
   .get(getOnePlayer)
   .patch(protect, updatePlayer)
-  .delete(protect, deletePlayer);
+  // .delete(protect, deletePlayer);
+  .delete(deletePlayer);
 
 module.exports = router;

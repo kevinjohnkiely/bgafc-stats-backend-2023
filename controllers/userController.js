@@ -39,7 +39,6 @@ exports.deleteUser = (req, res) => {
 
 exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
   const loggedInUser = await User.findById(req.session.userId);
-  console.log(loggedInUser);
   res.status(200).json({
     status: 'success',
     data: {
@@ -78,8 +77,7 @@ exports.signUp = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.login = catchAsyncErrors(async (req, res, next) => {
-  const { username } = req.body;
-  const { password } = req.body;
+  const { username, password } = req.body;
 
   if (!username || !password) {
     return next(new AppError('Parameters missing! Try again...', 400));
