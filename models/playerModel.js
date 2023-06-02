@@ -31,7 +31,7 @@ const playerSchema = new mongoose.Schema(
     position: {
       type: String,
       trim: true,
-      maxlength: [15, 'A Players position must be 15 characters or less!'],
+      maxlength: [20, 'A Players position must be 20 characters or less!'],
     },
     debut: {
       type: String,
