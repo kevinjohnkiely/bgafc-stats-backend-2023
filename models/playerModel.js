@@ -66,6 +66,12 @@ const playerSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    aTeamTotalApps: {
+      type: Number,
+    },
+    bTeamTotalApps: {
+      type: Number,
+    },
   },
   {
     toJSON: { virtuals: true },
