@@ -18,7 +18,8 @@ const seasonRouter = require('./routes/seasonRoutes');
 const app = express();
 
 // BODY PARSER
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ limit: '1mb', extended: true }));
 
 // DATA SANITIZATION AGAINST NOSQL QUERY INJECTION
 app.use(mongoSanitize());

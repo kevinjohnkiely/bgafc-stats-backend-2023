@@ -6,6 +6,7 @@ const {
   getOnePlayer,
   updatePlayer,
   deletePlayer,
+  uploadPhoto,
 } = require('../controllers/playerController');
 
 const seasonRouter = require('./seasonRoutes');
@@ -17,6 +18,7 @@ const router = express.Router();
 router.use('/:playerId/seasons', seasonRouter);
 
 router.route('/').get(getAllPlayers).post(protect, createPlayer);
+router.route('/uploadphoto/:playerSlug').post(uploadPhoto);
 router
   .route('/:playerSlug')
   .get(getOnePlayer)

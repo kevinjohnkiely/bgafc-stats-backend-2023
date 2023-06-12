@@ -49,6 +49,8 @@ const playerSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      default:
+        'https://res.cloudinary.com/dqp0vlv6x/image/upload/v1686566180/bgafc_stats/blank.jpg',
     },
     aTeamApps: {
       type: Number,

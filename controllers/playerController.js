@@ -1,6 +1,21 @@
+require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
 const Player = require('../models/playerModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
+// const { cloudinary } = require('../utils/cloudinary');
+// Require the cloudinary library
+
+// Return "https" URLs by setting secure: true
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
+
+// Log the configuration
+console.log(cloudinary.config());
 
 exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
   const players = await Player.find();
@@ -82,5 +97,42 @@ exports.deletePlayer = catchAsyncErrors(async (req, res, next) => {
   res.status(204).json({
     status: 'Success',
     data: null,
+  });
+});
+
+exports.uploadPhoto = catchAsyncErrors(async (req, res, next) => {
+  const fileStr = req.body.data;
+  const { fileName } = req.body;
+  console.log(fileName);
+  const options = {
+    public_id: fileName,
+    folder: 'bgafc_stats',
+  };
+  const uploadedResponse = await cloudinary.uploader.upload(fileStr, options);
+
+  console.log('U RESPONSE');
+  console.log(uploadedResponse);
+  req.body = {
+    image: uploadedResponse.url,
+  };
+  /////////
+  const playerToUpdate = await Player.findOneAndUpdate(
+    { slug: req.params.playerSlug },
+    req.body,
+    { new: true, runValidators: true }
+  );
+  console.log(playerToUpdate);
+
+  if (!playerToUpdate) {
+    return next(new AppError('That Player does not exist!', 404));
+  }
+
+  await playerToUpdate.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      player: playerToUpdate,
+    },
   });
 });
