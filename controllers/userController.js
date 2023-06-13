@@ -105,7 +105,6 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
   req.session.destroy((error) => {
-    console.log(`The error is: ${error}`);
     if (error) {
       return next(new AppError('Failed to log out! Try again...', 401));
     }

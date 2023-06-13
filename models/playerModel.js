@@ -74,6 +74,12 @@ const playerSchema = new mongoose.Schema(
     bTeamTotalApps: {
       type: Number,
     },
+    totalApps: {
+      type: Number,
+    },
+    totalGoals: {
+      type: Number,
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -89,13 +95,13 @@ playerSchema.virtual('seasons', {
 });
 
 // Virtual properties to calculate total apps/goals
-playerSchema.virtual('totalApps').get(function () {
-  return this.aTeamApps + this.bTeamApps;
-});
+// playerSchema.virtual('totalApps').get(function () {
+//   return this.aTeamApps + this.bTeamApps;
+// });
 
-playerSchema.virtual('totalGoals').get(function () {
-  return this.aTeamGoals + this.bTeamGoals;
-});
+// playerSchema.virtual('totalGoals').get(function () {
+//   return this.aTeamGoals + this.bTeamGoals;
+// });
 
 const Player = mongoose.model('Player', playerSchema);
 

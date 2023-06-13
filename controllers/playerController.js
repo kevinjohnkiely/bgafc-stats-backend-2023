@@ -18,7 +18,14 @@ cloudinary.config({
 console.log(cloudinary.config());
 
 exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
-  const players = await Player.find();
+  // console.log(req.query.sort);
+  let players;
+  if (req.query.sort) {
+    players = await Player.find().sort(req.query.sort);
+  } else {
+    players = await Player.find().sort('lastName').sort('firstName');
+  }
+
   res.status(200).json({
     status: 'success',
     numOfPlayers: players.length,

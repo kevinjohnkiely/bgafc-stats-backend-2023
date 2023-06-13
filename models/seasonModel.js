@@ -128,6 +128,8 @@ seasonSchema.statics.calcPlayerCareerTotals = async function (playerId) {
       aTeamGoals: stats[0].totalGoalsA,
       bTeamApps: stats[0].totalAppsB,
       bTeamGoals: stats[0].totalGoalsB,
+      totalApps: stats[0].totalAppsA + stats[0].totalAppsB,
+      totalGoals: stats[0].totalGoalsA + stats[0].totalGoalsB,
     });
   } else {
     await Player.findByIdAndUpdate(playerId, {
