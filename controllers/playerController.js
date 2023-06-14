@@ -18,13 +18,13 @@ cloudinary.config({
 console.log(cloudinary.config());
 
 exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
-  // console.log(req.query.sort);
   let players;
   if (req.query.sort) {
     players = await Player.find().sort(req.query.sort);
   } else {
-    players = await Player.find().sort('lastName').sort('firstName');
+    players = await Player.find().sort({ lastName: 1 });
   }
+  // const players = await Player.find().sort({ lastName: 1 });
 
   res.status(200).json({
     status: 'success',
@@ -110,25 +110,21 @@ exports.deletePlayer = catchAsyncErrors(async (req, res, next) => {
 exports.uploadPhoto = catchAsyncErrors(async (req, res, next) => {
   const fileStr = req.body.data;
   const { fileName } = req.body;
-  console.log(fileName);
   const options = {
     public_id: fileName,
     folder: 'bgafc_stats',
   };
   const uploadedResponse = await cloudinary.uploader.upload(fileStr, options);
 
-  console.log('U RESPONSE');
-  console.log(uploadedResponse);
   req.body = {
     image: uploadedResponse.url,
   };
-  /////////
+  // Update the player with new image URL
   const playerToUpdate = await Player.findOneAndUpdate(
     { slug: req.params.playerSlug },
     req.body,
     { new: true, runValidators: true }
   );
-  console.log(playerToUpdate);
 
   if (!playerToUpdate) {
     return next(new AppError('That Player does not exist!', 404));

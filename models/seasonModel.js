@@ -143,7 +143,6 @@ seasonSchema.statics.calcPlayerCareerTotals = async function (playerId) {
 
 seasonSchema.pre('save', function (next) {
   if (this.team === 'A') {
-    console.log('A team');
     this.seasonTotalAppsA =
       this.lge_apps +
       this.fai_apps +
@@ -164,7 +163,6 @@ seasonSchema.pre('save', function (next) {
       this.reidyc_goals +
       this.hoganc_goals;
   } else {
-    console.log(' Bteam');
     this.seasonTotalAppsB =
       this.lge_apps +
       this.fai_apps +
