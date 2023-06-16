@@ -3,8 +3,6 @@ const cloudinary = require('cloudinary').v2;
 const Player = require('../models/playerModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
-// const { cloudinary } = require('../utils/cloudinary');
-// Require the cloudinary library
 
 // Return "https" URLs by setting secure: true
 cloudinary.config({
@@ -24,7 +22,6 @@ exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
   } else {
     players = await Player.find().sort({ lastName: 1 });
   }
-  // const players = await Player.find().sort({ lastName: 1 });
 
   res.status(200).json({
     status: 'success',
@@ -36,11 +33,9 @@ exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getOnePlayer = catchAsyncErrors(async (req, res, next) => {
-  /*!! CHANGE THIS BACK FOR MY VERSION !! */
   const player = await Player.findOne({ slug: req.params.playerSlug }).populate(
     'seasons'
   );
-  // const player = await Player.findById(req.params.playerSlug);
 
   if (!player) {
     return next(new AppError('That Player does not exist!', 404));

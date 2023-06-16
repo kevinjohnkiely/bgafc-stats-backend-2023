@@ -94,15 +94,6 @@ playerSchema.virtual('seasons', {
   localField: '_id',
 });
 
-// Virtual properties to calculate total apps/goals
-// playerSchema.virtual('totalApps').get(function () {
-//   return this.aTeamApps + this.bTeamApps;
-// });
-
-// playerSchema.virtual('totalGoals').get(function () {
-//   return this.aTeamGoals + this.bTeamGoals;
-// });
-
 const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;

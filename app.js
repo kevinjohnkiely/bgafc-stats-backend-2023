@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -31,12 +31,12 @@ app.use(xss());
 app.use(hpp());
 
 // LIMITS REQUESTS FROM API
-// const limiter = rateLimit({
-//   max: 50,
-//   windowMs: 60 * 60 * 1000,
-//   message: 'Too many requests from this IP. Please try again in an hour!',
-// });
-// app.use('/api', limiter);
+const limiter = rateLimit({
+  max: 50,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP. Please try again in an hour!',
+});
+app.use('/api', limiter);
 
 // SET SECURITY HEADERS
 app.use(helmet());
