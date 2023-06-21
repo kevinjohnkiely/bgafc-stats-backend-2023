@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const cors = require('cors');
 
 const morgan = require('morgan');
 const AppError = require('./utils/errorHandling/appError');
@@ -17,6 +18,9 @@ const userRouter = require('./routes/userRoutes');
 const seasonRouter = require('./routes/seasonRoutes');
 
 const app = express();
+
+// Implement CORS
+app.use(cors());
 
 // BODY PARSER
 app.use(express.json({ limit: '1mb' }));
