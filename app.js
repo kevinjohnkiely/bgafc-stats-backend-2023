@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 
 const morgan = require('morgan');
 const AppError = require('./utils/errorHandling/appError');
@@ -40,6 +41,9 @@ app.use('/api', limiter);
 
 // SET SECURITY HEADERS
 app.use(helmet());
+
+// COMPRESS TEXT SENT TO CLIENTS
+app.use(compression());
 
 // SET UP SESSIONS
 const DB = process.env.DATABASE.replace(
