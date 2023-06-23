@@ -60,6 +60,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    name: 'bgafc-session-cookies',
     cookie: {
       maxAge: 60 * 60 * 1000 * 2,
     },
