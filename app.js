@@ -55,16 +55,19 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
+app.enable('trust proxy', true);
 
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
+    proxy: true,
     saveUninitialized: false,
     name: 'bgafc-session-cookies',
     cookie: {
       maxAge: 60 * 60 * 1000 * 2,
+      secure: false,
     },
     rolling: true,
     store: MongoStore.create({
