@@ -55,7 +55,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-// app.set('trust proxy', 1);
+app.set('trust proxy', 1);
 
 app.use(
   session({
