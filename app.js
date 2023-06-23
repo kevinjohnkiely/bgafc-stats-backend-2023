@@ -67,7 +67,8 @@ app.use(
     name: 'bgafc-session-cookies',
     cookie: {
       maxAge: 60 * 60 * 1000 * 2,
-      // secure: false,
+      secure: true,
+      sameSite: 'none',
     },
     rolling: true,
     store: MongoStore.create({
