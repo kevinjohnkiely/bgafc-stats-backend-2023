@@ -50,10 +50,10 @@ app.use(helmet());
 app.use(compression());
 
 // SET UP SESSIONS
-const DB = process.env.DATABASE.replace(
-  '<THE_PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
+// const DB = process.env.DATABASE.replace(
+//   '<THE_PASSWORD>',
+//   process.env.DATABASE_PASSWORD
+// );
 
 app.use(
   session({
@@ -65,7 +65,7 @@ app.use(
     },
     rolling: true,
     store: MongoStore.create({
-      mongoUrl: DB,
+      mongoUrl: process.env.DATABASE,
     }),
   })
 );
