@@ -50,11 +50,12 @@ app.use(helmet());
 app.use(compression());
 
 // SET UP SESSIONS
-// const DB = process.env.DATABASE.replace(
-//   '<THE_PASSWORD>',
-//   process.env.DATABASE_PASSWORD
-// );
-app.set('trust proxy', 1);
+const DB = process.env.DATABASE.replace(
+  '<THE_PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+// app.set('trust proxy', 1);
 
 app.use(
   session({
@@ -63,14 +64,11 @@ app.use(
     saveUninitialized: false,
     name: 'bgafc-session-cookies',
     cookie: {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
       maxAge: 60 * 60 * 1000 * 2,
     },
     rolling: true,
     store: MongoStore.create({
-      mongoUrl: process.env.DATABASE,
+      mongoUrl: DB,
     }),
   })
 );
