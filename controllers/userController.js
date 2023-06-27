@@ -4,7 +4,10 @@ const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
 exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
-  const loggedInUser = await User.findById(req.session.userId);
+  const authUser = req.session.userId;
+
+  const loggedInUser = await User.findById(authUser);
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -61,6 +64,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   }
   //all ok, establish session
   req.session.userId = user._id;
+  console.log(req.session.userId);
   res.status(201).json({
     status: 'success',
     data: {
