@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.use('/:playerId/seasons', seasonRouter);
 
-router.route('/').get(getAllPlayers).post(protect, createPlayer);
+router.route('/').get(protect, getAllPlayers).post(protect, createPlayer);
 router.route('/uploadphoto/:playerSlug').post(protect, uploadPhoto);
 router
   .route('/:playerSlug')

@@ -16,7 +16,6 @@ cloudinary.config({
 console.log(cloudinary.config());
 
 exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
-  console.log(`session id is - ${req.session.userId}`);
   let players;
   if (req.query.sort) {
     players = await Player.find().sort(req.query.sort);

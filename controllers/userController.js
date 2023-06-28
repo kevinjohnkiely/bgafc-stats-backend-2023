@@ -1,20 +1,28 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
-exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
-  const authUser = req.session.userId;
-
-  const loggedInUser = await User.findById(authUser);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: loggedInUser,
-    },
+const signToken = (id) => {
+  console.log(id);
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
-});
+};
+
+// exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
+//   const authUser = req.session.userId;
+
+//   const loggedInUser = await User.findById(authUser);
+
+//   res.status(200).json({
+//     status: 'success',
+//     data: {
+//       user: loggedInUser,
+//     },
+//   });
+// });
 
 exports.signUp = catchAsyncErrors(async (req, res, next) => {
   const { username } = req.body;
@@ -34,8 +42,6 @@ exports.signUp = catchAsyncErrors(async (req, res, next) => {
     username: username,
     password: hashedPassword,
   });
-
-  req.session.userId = newUser._id;
 
   res.status(201).json({
     status: 'success',
@@ -62,22 +68,24 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!passwordMatch) {
     return next(new AppError('Invalid login credentials! Try again...', 401));
   }
-  //all ok, establish session
-  req.session.userId = user._id;
-  console.log(`session id is - ${req.session.userId}`);
+  //all ok, create json token
+  const token = signToken(user._id);
+  console.log(token);
+
   res.status(201).json({
     status: 'success',
-    data: {
-      user: user,
-    },
+    token,
+    // data: {
+    //   user: user,
+    // },
   });
 });
 
-exports.logout = catchAsyncErrors(async (req, res, next) => {
-  req.session.destroy((error) => {
-    if (error) {
-      return next(new AppError('Failed to log out! Try again...', 401));
-    }
-    res.sendStatus(200);
-  });
-});
+// exports.logout = catchAsyncErrors(async (req, res, next) => {
+//   req.session.destroy((error) => {
+//     if (error) {
+//       return next(new AppError('Failed to log out! Try again...', 401));
+//     }
+//     res.sendStatus(200);
+//   });
+// });

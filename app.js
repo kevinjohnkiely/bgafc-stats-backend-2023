@@ -1,6 +1,4 @@
 const express = require('express');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -21,7 +19,6 @@ const app = express();
 
 // Implement CORS
 app.use(cors());
-// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // BODY PARSER
 app.use(express.json({ limit: '1mb' }));
@@ -49,30 +46,6 @@ app.use(helmet());
 
 // COMPRESS TEXT SENT TO CLIENTS
 app.use(compression());
-
-// SET UP SESSIONS
-const DB = process.env.DATABASE.replace(
-  '<THE_PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
-
-// app.set('trust proxy', 1);
-// app.enable('trust proxy', true);
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 60 * 60 * 1000 * 2,
-    },
-    rolling: true,
-    store: MongoStore.create({
-      mongoUrl: DB,
-    }),
-  })
-);
 
 // DEVELOPMENT LOGGING
 console.log(process.env.NODE_ENV);
