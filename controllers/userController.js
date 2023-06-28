@@ -64,7 +64,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   }
   //all ok, establish session
   req.session.userId = user._id;
-  console.log(req.session.userId);
+  console.log(`session id is - ${req.session.userId}`);
   res.status(201).json({
     status: 'success',
     data: {
