@@ -20,8 +20,8 @@ const seasonRouter = require('./routes/seasonRoutes');
 const app = express();
 
 // Implement CORS
-// app.use(cors());
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors());
+// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // BODY PARSER
 app.use(express.json({ limit: '1mb' }));
