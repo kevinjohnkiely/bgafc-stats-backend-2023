@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -5,7 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
-const cors = require('cors');
+// const cors = require('cors');
 
 const morgan = require('morgan');
 const AppError = require('./utils/errorHandling/appError');
@@ -17,8 +18,14 @@ const seasonRouter = require('./routes/seasonRoutes');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+// SERVE STATIC FILES
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Implement CORS
-app.use(cors());
+// app.use(cors());
 
 // BODY PARSER
 app.use(express.json({ limit: '1mb' }));
@@ -35,7 +42,7 @@ app.use(hpp());
 
 // LIMITS REQUESTS FROM API
 const limiter = rateLimit({
-  max: 50,
+  max: 100,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP. Please try again in an hour!',
 });
@@ -52,9 +59,15 @@ console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-// app.use(express.static(`${__dirname}/public`))
 
 // MOUNTING THE ROUTES
+app.get('/', (req, res) => {
+  res.status(200).render('base', {
+    player: 'Kevin Kiely',
+    age: 45,
+  });
+});
+
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
