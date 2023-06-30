@@ -36,3 +36,16 @@ body {
   background-repeat: no-repeat;
   background-position: left top;
 }
+
+.login {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.login a {
+  color: #ffcb00;
+}
+
+.login a:hover {
+  color: #336600;
+}

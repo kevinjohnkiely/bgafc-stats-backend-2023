@@ -9,9 +9,7 @@ html
         title Ballingarry AFC All-Time Player Stats 1984 - Present | #{player}
     body 
         .container.page-max-width 
-            header.page-margin-top
-                img.img-fluid.header-img-full-width(src='img/header.jpg' alt='Ballingarry AFC stats 1984 - Present')
+            include _header
             .container-fluid.main-content
-                span main content 
-            footer.footer
-                span Ballingarry AFC - Founded 1984 - Members of Limerick Desmond Football League, Football Association of Ireland.
+                section main content 
+            include _footer
