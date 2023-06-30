@@ -1,9 +1,38 @@
 body {
-    margin: 0;
-    background-color: #339900;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  margin: 0;
+  background-color: #339900;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header-img-full-width {
+  width: 100%;
+}
+
+.page-max-width {
+  max-width: 1050px;
+}
+
+.page-margin-top {
+  margin-top: 1rem;
+}
+
+.main-content {
+  background-color: white;
+}
+
+.footer {
+  background-color: #336600;
+  text-align: center;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2rem 0 2rem 0;
+  border-top: 3px solid #ffcb00;
+  border-bottom: 3px solid #ffcb00;
+  background-image: url('../img/footercrest.jpg');
+  background-repeat: no-repeat;
+  background-position: left top;
+}
