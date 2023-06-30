@@ -68,6 +68,18 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/players', (req, res) => {
+  res.status(200).render('players', {
+    title: 'All Players',
+  });
+});
+
+app.get('/player', (req, res) => {
+  res.status(200).render('player', {
+    title: 'Player One',
+  });
+});
+
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
