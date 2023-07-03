@@ -1,4 +1,30 @@
 extends base
 
-block content 
-    h1 this is the list of players
+block content
+    .container-fluid 
+        h3.player-list-heading All-Time Player Statistics 1984 – present
+        table.table.table-bordered.table-hover.player-table
+            thead
+                tr 
+                    th(style="width: 50%; line-height: 2.2rem; text-align:left") Player 
+                    th A Team Apps 
+                    th A Team Goals 
+                    th B Team Apps 
+                    th B Team Goals 
+                    th Total Apps 
+                    th Total Goals
+            tbody 
+                each player in players
+                    tr
+                        td(style='text-align:left') 
+                            a(href=`/players/${player.slug}`)
+                                strong= `${player.lastName.toUpperCase()}, `
+                                span= player.firstName
+                        td= player.aTeamApps
+                        td= player.aTeamGoals
+                        td= player.bTeamApps
+                        td= player.bTeamGoals
+                        td 
+                            strong= player.totalApps
+                        td
+                            strong= player.totalGoals

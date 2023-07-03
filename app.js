@@ -15,6 +15,7 @@ const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 const playerRouter = require('./routes/playerRoutes');
 const userRouter = require('./routes/userRoutes');
 const seasonRouter = require('./routes/seasonRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -61,25 +62,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // MOUNTING THE ROUTES
-app.get('/', (req, res) => {
-  res.status(200).render('base', {
-    player: 'Kevin Kiely',
-    age: 45,
-  });
-});
-
-app.get('/players', (req, res) => {
-  res.status(200).render('players', {
-    title: 'All Players',
-  });
-});
-
-app.get('/player', (req, res) => {
-  res.status(200).render('player', {
-    title: 'Player One',
-  });
-});
-
+app.use('/', viewRouter);
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
