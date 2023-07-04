@@ -1,7 +1,7 @@
 const Player = require('../models/playerModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 
-exports.getPlayers = catchAsyncErrors(async (req, res) => {
+exports.getPlayers = catchAsyncErrors(async (req, res, next) => {
   // 1 - get players data
   const players = await Player.find();
 
@@ -14,7 +14,7 @@ exports.getPlayers = catchAsyncErrors(async (req, res) => {
   });
 });
 
-exports.getPlayer = catchAsyncErrors(async (req, res) => {
+exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug }).populate(
     'seasons'
   );
@@ -23,3 +23,9 @@ exports.getPlayer = catchAsyncErrors(async (req, res) => {
     player,
   });
 });
+
+exports.getLoginForm = (req, res) => {
+  res.status(200).render('login', {
+    title: 'Login to update stats',
+  });
+};

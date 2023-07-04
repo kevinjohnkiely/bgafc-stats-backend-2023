@@ -41,6 +41,7 @@ body {
 .login {
   text-align: center;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .login a {
@@ -135,4 +136,12 @@ body {
 .stats-table td {
   font-size: 0.9rem;
   color: #336600;
+}
+
+.login-form {
+  width: 50%;
+  padding: 1rem;
+  background-color: #ffcb00;
+  margin: auto;
+  margin-top: 1rem;
 }
