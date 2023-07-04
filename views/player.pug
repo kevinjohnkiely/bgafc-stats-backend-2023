@@ -9,9 +9,47 @@ block content
                 //- img(src=`${player.image}`)
                 img.player-image(src='/img/blank.jpg' alt=`${player.firstName} ${player.lastName}`)
             .col-lg-10.col-md-8 
-                ul 
-                    li= `Appearances: ${player.totalApps} Goals: ${player.totalGoals}`
+                ul.player-details 
+                    li.green-bold= `Appearances: ${player.totalApps} Goals: ${player.totalGoals}`
                     li= `Date of Birth: ${player.dateOfBirth}`
                     li= `Position: ${player.position}`
                     li= `Debut: ${player.debut}`
                     li= `First Goal: ${player.firstGoal}`
+        .row.honours-box 
+            .col= player.honours
+        .row.apps-panel 
+            .col Appearances (Goals in brackets)
+        .row 
+            table.table.table-bordered.table-hover.stats-table
+                thead 
+                    tr 
+                        th Season
+                        th Team
+                        th Div
+                        th Lge
+                        th FAI
+                        th MJC
+                        th MSC
+                        th Des C
+                        th Lge C
+                        th Reidy C
+                        th Hogan C
+                        th Total
+                tbody 
+                    each season in player.seasons 
+                        tr 
+                            td= season.season
+                            td= season.team
+                            td= season.division
+                            td= `${season.lge_apps} (${season.lge_goals})`
+                            td= `${season.fai_apps} (${season.fai_goals})`
+                            td= `${season.mjc_apps} (${season.mjc_goals})`
+                            td= `${season.msc_apps} (${season.msc_goals})`
+                            td= `${season.desc_apps} (${season.desc_goals})`
+                            td= `${season.lgec_apps} (${season.lgec_goals})`
+                            td= `${season.reidyc_apps} (${season.reidyc_goals})`
+                            td= `${season.hoganc_apps} (${season.hoganc_goals})`
+                            - if (season.team === 'A')
+                                td= `${season.seasonTotalAppsA} (${season.seasonTotalGoalsA})`
+                            - if (season.team === 'B')
+                                td= `${season.seasonTotalAppsB} (${season.seasonTotalGoalsB})`

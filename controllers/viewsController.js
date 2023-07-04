@@ -19,7 +19,7 @@ exports.getPlayer = catchAsyncErrors(async (req, res) => {
     'seasons'
   );
   res.status(200).render('player', {
-    title: 'Player One',
+    title: `${player.firstName} ${player.lastName}`,
     player,
   });
 });
