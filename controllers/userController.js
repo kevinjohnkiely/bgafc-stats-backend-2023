@@ -81,7 +81,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
 
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     token,
     // data: {

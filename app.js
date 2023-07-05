@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
+const cookieParser = require('cookie-parser');
 // const cors = require('cors');
 
 const morgan = require('morgan');
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // BODY PARSER
 app.use(express.json({ limit: '1mb' }));
+app.use(cookieParser());
 app.use(express.urlencoded({ limit: '1mb', extended: true }));
 
 // DATA SANITIZATION AGAINST NOSQL QUERY INJECTION
@@ -50,7 +52,17 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // SET SECURITY HEADERS
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
+      baseUri: ["'self'"],
+      fontSrc: ["'self'", 'https:', 'http:', 'data:'],
+      scriptSrc: ["'self'", 'https:', 'http:', 'blob:'],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https:', 'http:'],
+    },
+  })
+);
 
 // COMPRESS TEXT SENT TO CLIENTS
 app.use(compression());
@@ -60,6 +72,12 @@ console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// TEST MIDDLEWARE
+app.use((req, res, next) => {
+  console.log(req.cookies);
+  next();
+});
 
 // MOUNTING THE ROUTES
 app.use('/', viewRouter);
