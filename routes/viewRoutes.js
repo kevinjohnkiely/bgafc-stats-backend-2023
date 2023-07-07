@@ -4,12 +4,14 @@ const {
   getPlayer,
   getLoginForm,
 } = require('../controllers/viewsController');
-const { protect } = require('../middleware/auth');
+const { isLoggedIn } = require('../middleware/isLoggedIn');
 
 const router = express.Router();
 
+router.use(isLoggedIn);
+
 router.get('/', getPlayers);
-router.get('/players/:slug', protect, getPlayer);
+router.get('/players/:slug', getPlayer);
 router.get('/login', getLoginForm);
 
 module.exports = router;

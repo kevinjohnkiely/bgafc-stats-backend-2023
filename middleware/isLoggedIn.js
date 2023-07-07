@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const User = require('../models/userModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
-// const AppError = require('../utils/errorHandling/appError');
 
 // only for rendered pages, no errors!
 exports.isLoggedIn = catchAsyncErrors(async (req, res, next) => {
@@ -22,7 +21,7 @@ exports.isLoggedIn = catchAsyncErrors(async (req, res, next) => {
 
     // THERE IS A LOGGED IN USER
     res.locals.user = currentUser;
-    next();
+    // next();
   }
-  // next();
+  next();
 });
