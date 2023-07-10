@@ -2,7 +2,6 @@
 // import axios from 'axios';
 
 const login = async (username, password) => {
-  console.log(username, password);
   try {
     const res = await axios({
       method: 'POST',
@@ -12,9 +11,15 @@ const login = async (username, password) => {
         password,
       },
     });
-    console.log(res);
+
+    if (res.data.status === 'success') {
+      alert('Logged in successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
   } catch (err) {
-    console.log(err.response.data);
+    alert(err.response.data.message);
   }
 };
 
