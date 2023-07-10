@@ -1,4 +1,3 @@
-
 const hideAlert = () => {
   const el = document.querySelector('.alert');
   if (el) el.parentElement.removeChild(el);
@@ -13,6 +12,7 @@ const showAlert = (type, msg) => {
 
 // DOM ELEMENTS
 const loginForm = document.querySelector('.login-form');
+const logoutBtn = document.querySelector('.logout-user');
 
 const login = async (username, password) => {
   try {
@@ -43,4 +43,22 @@ if (loginForm) {
     const password = document.getElementById('password-input').value;
     login(username, password);
   });
+}
+
+const logout = async () => {
+  try {
+    const res = await axios({
+      method: 'GET',
+      url: 'http://localhost:1984/api/v1/users/logout',
+    });
+    if ((res.data.status = 'success')) {
+      location.reload(true);
+    }
+  } catch (error) {
+    showAlert('error', 'Error logging out, please try again later!');
+  }
+};
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', logout);
 }
