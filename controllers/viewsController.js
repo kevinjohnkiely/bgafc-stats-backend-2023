@@ -1,5 +1,6 @@
 const Player = require('../models/playerModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
+const AppError = require('../utils/errorHandling/appError');
 
 exports.getPlayers = catchAsyncErrors(async (req, res, next) => {
   // 1 - get players data
@@ -18,6 +19,11 @@ exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug }).populate(
     'seasons'
   );
+
+  if (!player) {
+    return next(new AppError('There is no player by that name!', 404));
+  }
+
   res.status(200).render('player', {
     title: `${player.firstName} ${player.lastName}`,
     player,
