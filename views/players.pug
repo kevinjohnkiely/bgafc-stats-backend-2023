@@ -2,7 +2,7 @@ extends base
 
 block content
     .container-fluid 
-        h3.player-list-heading All-Time Player Statistics 1984 – present
+        h3.page-heading All-Time Player Statistics 1984 – present
         table.table.table-bordered.table-hover.player-table
             thead
                 tr 
@@ -28,3 +28,6 @@ block content
                             strong= player.totalApps
                         td
                             strong= player.totalGoals
+        if user
+            .text-center    
+                a(href='/addplayer') Add Player

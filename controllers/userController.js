@@ -98,12 +98,3 @@ exports.logout = (req, res) => {
   });
   res.status(200).json({ status: 'success' });
 };
-
-// exports.logout = catchAsyncErrors(async (req, res, next) => {
-//   req.session.destroy((error) => {
-//     if (error) {
-//       return next(new AppError('Failed to log out! Try again...', 401));
-//     }
-//     res.sendStatus(200);
-//   });
-// });

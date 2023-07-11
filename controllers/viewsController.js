@@ -35,3 +35,9 @@ exports.getLoginForm = (req, res) => {
     title: 'Login to update stats',
   });
 };
+
+exports.addPlayer = (req, res) => {
+  res.status(200).render('addplayer', {
+    title: 'Add New Player'
+  })
+}
