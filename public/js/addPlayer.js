@@ -25,6 +25,9 @@ const addPlayer = async (playerData) => {
 
     if (res.data.status === 'success') {
       showAddPlayerAlert('success', 'Player added!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
     }
   } catch (error) {
     showAddPlayerAlert('error', error.response.data.message);

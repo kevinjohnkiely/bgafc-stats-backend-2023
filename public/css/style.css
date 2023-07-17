@@ -138,6 +138,14 @@ body {
   color: #336600;
 }
 
+.player-btns {
+  margin-left: 0.6rem;
+}
+
+.modal-show {
+  display: inline-block;
+}
+
 .login-form {
   width: 50%;
   padding: 1rem;

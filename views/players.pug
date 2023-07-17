@@ -20,6 +20,9 @@ block content
                             a(href=`/players/${player.slug}`)
                                 strong= `${player.lastName.toUpperCase()}, `
                                 span= player.firstName
+                            span.player-btns 
+                                i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; font-size: 1.3rem')
+                                i.fa-solid.fa-pen-to-square(style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
                         td= player.aTeamApps
                         td= player.aTeamGoals
                         td= player.bTeamApps
@@ -31,3 +34,15 @@ block content
         if user
             .text-center    
                 a(href='/addplayer') Add Player
+        .modal.delete-player-modal
+            .modal-dialog
+                .modal-content 
+                    .modal-header 
+                        h5.modal-title Delete Player
+                    .modal-body 
+                        p Are you sure you want to delete this player?
+                    .modal-footer 
+                        button.btn.btn-danger.delete-player-btn Yes, Delete! 
+                        button.btn.btn-primary.cancel-delete-player Cancel
+    script(src="/js/deletePlayer.js") 
+                    
