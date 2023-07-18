@@ -18,7 +18,9 @@ block content
                     li= `Debut: ${player.debut}`
                     li= `First Goal: ${player.firstGoal}`
         .row.honours-box 
-            .col= player.honours
+            .col
+                span(style='font-weight:bold; margin-right: 0.7rem') Honours:
+                span= player.honours
         .row.apps-panel 
             .col Appearances (Goals in brackets)
         .row 

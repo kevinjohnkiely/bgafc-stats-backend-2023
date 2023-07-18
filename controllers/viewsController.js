@@ -30,6 +30,19 @@ exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.updatePlayer = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findOne({ slug: req.params.slug });
+
+  if (!player) {
+    return next(new AppError('There is no player by that name!', 404));
+  }
+
+  res.status(200).render('updateplayer', {
+    title: `Update ${player.firstName} ${player.lastName}`,
+    player,
+  });
+});
+
 exports.getLoginForm = (req, res) => {
   res.status(200).render('login', {
     title: 'Login to update stats',
@@ -38,12 +51,12 @@ exports.getLoginForm = (req, res) => {
 
 exports.loggedOutInfo = (req, res) => {
   res.status(200).render('loggedout', {
-    title: 'User now logged out'
-  })
-}
+    title: 'User now logged out',
+  });
+};
 
 exports.addPlayer = (req, res) => {
   res.status(200).render('addplayer', {
-    title: 'Add New Player'
-  })
-}
+    title: 'Add New Player',
+  });
+};

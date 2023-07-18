@@ -1,7 +1,5 @@
 footer.footer
     span Ballingarry AFC - Founded 1984 - Members of Limerick Desmond Football League, Football Association of Ireland.
 .login
-    if user 
-        a(href='/logout') Logout 
-    else 
-        a(href='/login') Login
+    if !user 
+        a(href='/login') Login        

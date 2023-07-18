@@ -1,44 +1,45 @@
-// import axios from 'axios';
-const hideAddPlayerAlert = () => {
+const hideUpdatePlayerAlert = () => {
   const el = document.querySelector('.alert');
   if (el) el.parentElement.removeChild(el);
 };
 
-const showAddPlayerAlert = (type, msg) => {
-  hideAddPlayerAlert();
+const showUpdatePlayerAlert = (type, msg) => {
+  hideUpdatePlayerAlert();
   const markup = `<div class="alert alert--${type}">${msg}</div>`;
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-  window.setTimeout(hideAddPlayerAlert, 5000);
+  window.setTimeout(hideUpdatePlayerAlert, 5000);
 };
 
-// DOM ELEMENTS
-const addPlayerForm = document.querySelector('.add-player-form');
+// DOM elements
+const updatePlayerForm = document.querySelector('.update-player-form');
 
-const addPlayer = async (playerData) => {
-  console.log('add player func');
+const updatePlayer = async (playerData) => {
+  const { slug } = playerData;
   try {
     const res = await axios({
-      method: 'POST',
-      url: 'http://localhost:1984/api/v1/players',
+      method: 'PATCH',
+      url: `http://localhost:1984/api/v1/players/${slug}`,
       data: playerData,
     });
+    console.log(res.data);
 
     if (res.data.status === 'success') {
-      showAddPlayerAlert('success', 'Player added!');
+      showUpdatePlayerAlert('success', 'Player updated!');
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);
     }
   } catch (error) {
-    showAddPlayerAlert('error', error.response.data.message);
+    showUpdatePlayerAlert('error', error.response.data.data.message);
   }
 };
 
-if (addPlayerForm) {
-  addPlayerForm.addEventListener('submit', (e) => {
+if (updatePlayerForm) {
+  updatePlayerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
+    const slug = document.getElementById('slug').value;
     const dateOfBirth = document.getElementById('dateOfBirth').value;
     const position = document.getElementById('position').value;
     const debut = document.getElementById('debut').value;
@@ -47,13 +48,14 @@ if (addPlayerForm) {
     const playerObj = {
       firstName,
       lastName,
+      slug,
       dateOfBirth,
       position,
       debut,
       firstGoal,
       honours,
     };
-    console.log(playerObj);
-    addPlayer(playerObj);
+    // console.log(playerObj);
+    updatePlayer(playerObj);
   });
 }

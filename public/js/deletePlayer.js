@@ -12,6 +12,7 @@ const showDeletePlayerAlert = (type, msg) => {
 
 // DOM ELEMENTS
 const deletePlayerBtns = document.querySelectorAll('.delete-player');
+const editPlayerBtns = document.querySelectorAll('.edit-player');
 const deletePlayerModal = document.querySelector('.delete-player-modal');
 const cancelDeletePlayer = document.querySelector('.cancel-delete-player');
 const deletePlayerBtn = document.querySelector('.delete-player-btn');
@@ -20,7 +21,7 @@ const deletePlayer = async (slug) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${slug}`,
+      url: `http://localhost:1984/api/v1/players/${slug}`,
     });
 
     showDeletePlayerAlert('success', 'Player deleted!');
@@ -35,18 +36,23 @@ const deletePlayer = async (slug) => {
 if (deletePlayerBtns) {
   deletePlayerBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      console.log('click');
-      console.log(btn.dataset.slug);
-      //   deletePlayer(btn.dataset.slug);
       deletePlayerModal.classList.add('modal-show');
       if (deletePlayerBtn) {
         deletePlayerBtn.addEventListener('click', () => {
-          console.log(btn.dataset.slug);
           deletePlayer(btn.dataset.slug);
         });
       }
     });
   });
+}
+
+if (editPlayerBtns) {
+  editPlayerBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      console.log(btn.dataset.slug)
+      location.assign(`http://localhost:1984/players/${btn.dataset.slug}/edit`)
+    })
+  })
 }
 
 if (cancelDeletePlayer) {

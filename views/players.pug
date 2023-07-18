@@ -20,9 +20,10 @@ block content
                             a(href=`/players/${player.slug}`)
                                 strong= `${player.lastName.toUpperCase()}, `
                                 span= player.firstName
-                            span.player-btns 
-                                i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; font-size: 1.3rem')
-                                i.fa-solid.fa-pen-to-square(style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
+                            if user
+                                span.player-btns 
+                                    i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; font-size: 1.3rem')
+                                    i.fa-solid.fa-pen-to-square.edit-player(data-slug=`${player.slug}`, style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
                         td= player.aTeamApps
                         td= player.aTeamGoals
                         td= player.bTeamApps
@@ -33,7 +34,9 @@ block content
                             strong= player.totalGoals
         if user
             .text-center    
-                a(href='/addplayer') Add Player
+                //- a(href='/addplayer') Add Player
+                a.btn.btn-success(href='/addplayer' role="button" style="margin-top: 1rem") Add Player
+                //- <a href="#link" class="btn btn-info" role="button">Link Button</a>
         .modal.delete-player-modal
             .modal-dialog
                 .modal-content 
