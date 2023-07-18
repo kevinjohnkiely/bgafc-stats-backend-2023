@@ -52,7 +52,8 @@ const logout = async () => {
       url: 'http://localhost:1984/api/v1/users/logout',
     });
     if ((res.data.status = 'success')) {
-      location.reload(true);
+      // location.reload(true);
+      location.assign('/logout');
     }
   } catch (error) {
     showAlert('error', 'Error logging out, please try again later!');

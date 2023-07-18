@@ -36,6 +36,12 @@ exports.getLoginForm = (req, res) => {
   });
 };
 
+exports.loggedOutInfo = (req, res) => {
+  res.status(200).render('loggedout', {
+    title: 'User now logged out'
+  })
+}
+
 exports.addPlayer = (req, res) => {
   res.status(200).render('addplayer', {
     title: 'Add New Player'
