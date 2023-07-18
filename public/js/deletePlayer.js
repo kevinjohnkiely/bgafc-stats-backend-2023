@@ -20,7 +20,7 @@ const deletePlayer = async (slug) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://localhost:1984/api/v1/players/${slug}`,
+      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${slug}`,
     });
 
     showDeletePlayerAlert('success', 'Player deleted!');
