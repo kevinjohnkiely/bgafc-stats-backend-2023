@@ -43,6 +43,10 @@ block content
                     each season in player.seasons 
                         tr 
                             td= season.season
+                                if user
+                                    span.player-btns 
+                                        i.fa-solid.fa-circle-xmark.delete-season(data-season=`${season._id}`, style='color:red; font-size: 1.3rem')
+                                        i.fa-solid.fa-pen-to-square.edit-season(data-season=`${season._id}`, style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
                             td= season.team
                             td= season.division
                             td= `${season.lge_apps} (${season.lge_goals})`
@@ -61,3 +65,14 @@ block content
             .text-center    
                 a.btn.btn-success(href=`/addseason/${player._id}/A` role="button" style="margin-top: 1rem; margin-right: 0.5rem") Add Season (A Team)
                 a.btn.btn-warning(href=`/addseason/${player._id}/B` role="button" style="margin-top: 1rem") Add Season (B Team)
+        .modal.delete-season-modal
+            .modal-dialog
+                .modal-content 
+                    .modal-header 
+                        h5.modal-title Delete Season
+                    .modal-body 
+                        p Are you sure you want to delete this season?
+                    .modal-footer 
+                        button.btn.btn-danger.delete-season-btn Yes, Delete! 
+                        button.btn.btn-primary.cancel-delete-season Cancel
+    script(src="/js/deleteSeason.js") 

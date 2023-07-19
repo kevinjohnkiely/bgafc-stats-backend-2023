@@ -26,7 +26,7 @@ const addSeason = async (seasonData) => {
     if (res.data.status === 'success') {
       showAddSeasonAlert('success', 'Season data added!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign(`/players/${seasonPlayerId.dataset.slug}`);
       }, 1500);
     }
   } catch (error) {
