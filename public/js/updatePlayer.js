@@ -12,13 +12,13 @@ const showUpdatePlayerAlert = (type, msg) => {
 
 // DOM elements
 const updatePlayerForm = document.querySelector('.update-player-form');
+const slugDataItem = document.getElementById('player-slug');
 
 const updatePlayer = async (playerData) => {
-  const { slug } = playerData;
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `http://localhost:1984/api/v1/players/${slug}`,
+      url: `http://localhost:1984/api/v1/players/${slugDataItem.dataset.slug}`,
       data: playerData,
     });
     console.log(res.data);

@@ -1,0 +1,95 @@
+extends base
+
+block content 
+    .container-fluid 
+        h3.page-heading#playerId(data-playerid=`${player._id}` data-team=`${team}`)= `Add Season for ${player.firstName} ${player.lastName}`
+        form(style="width: 80%; margin: auto").add-season-form
+            .row 
+                .col-md-2.col-sm-6 
+                    .mb-3
+                        label.form-label(for='season') Season Years: 
+                        input.form-control(type='text' id='season' required placeholder='e.g: 2022/03')
+                .col-md-2.col-sm-6 
+                    .mb-3
+                        label.form-label(for='divison') Division: 
+                        select.form-control(name='division' id='division' required)
+                            option(value='Prem') Prem
+                            option(value='1') 1
+                            option(value='2') 2
+                            option(value='2a') 2a
+                            option(value='2b') 2b
+                            option(value='3') 3
+                            option(value='3a') 3a
+                            option(value='3b') 3b
+                            option(value='4') 4
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='lge_apps') League Apps: 
+                        input.form-control(type='number' id='lge_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='lge_goals') League Goals: 
+                        input.form-control(type='number' id='lge_goals' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='fai_apps') FAI Apps: 
+                        input.form-control(type='number' id='fai_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='fai_goals') FAI Goals: 
+                        input.form-control(type='number' id='fai_goals' min=0 value=0)
+            .row 
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='mjc_apps') MJC Apps: 
+                        input.form-control(type='number' id='mjc_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='mjc_goals') MJC Goals: 
+                        input.form-control(type='number' id='mjc_goals' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='msc_apps') MSC Apps: 
+                        input.form-control(type='number' id='msc_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='msc_goals') MSC Goals: 
+                        input.form-control(type='number' id='msc_goals' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='desc_apps') Des C Apps: 
+                        input.form-control(type='number' id='desc_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='desc_goals') Des C Goals: 
+                        input.form-control(type='number' id='desc_goals' min=0 value=0)
+            .row 
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='lgec_apps') Lge Cup Apps: 
+                        input.form-control(type='number' id='lgec_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='lgec_goals') Lge Cup Goals: 
+                        input.form-control(type='number' id='lgec_goals' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='reidyc_apps') Reidy C Apps: 
+                        input.form-control(type='number' id='reidyc_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='reidyc_goals') Reidy C Goals: 
+                        input.form-control(type='number' id='reidyc_goals' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='hoganc_apps') Hogan C Apps: 
+                        input.form-control(type='number' id='hoganc_apps' min=0 value=0)
+                .col-md-2.col-sm-6 
+                    .mb-3 
+                        label.form-label(for='hoganc_goals') Hogan C Goals: 
+                        input.form-control(type='number' id='hoganc_goals' min=0 value=0)
+            .text-center
+                button.btn.btn-success.btn-lg(type='submit') Add Season
+                a.btn.btn-outline-danger.btn-lg(href='/' role="button" style="margin-left: 0.7rem") Go Back
+    //- script(src="/js/utils/formValidation.js") 
+    script(src="/js/addSeason.js") 

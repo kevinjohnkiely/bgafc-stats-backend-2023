@@ -5,7 +5,8 @@ const {
   getLoginForm,
   loggedOutInfo,
   addPlayer,
-  updatePlayer
+  updatePlayer,
+  addSeason
 } = require('../controllers/viewsController');
 const { protect } = require('../middleware/auth');
 const { isLoggedIn } = require('../middleware/isLoggedIn');
@@ -18,5 +19,6 @@ router.get('/players/:slug/edit', isLoggedIn, updatePlayer);
 router.get('/login', isLoggedIn, getLoginForm);
 router.get('/logout', isLoggedIn, loggedOutInfo);
 router.get('/addplayer', protect, addPlayer)
+router.get('/addseason/:playerId/:team', protect, addSeason)
 
 module.exports = router;

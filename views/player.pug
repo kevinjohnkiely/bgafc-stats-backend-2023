@@ -57,3 +57,7 @@ block content
                                 td= `${season.seasonTotalAppsA} (${season.seasonTotalGoalsA})`
                             - if (season.team === 'B')
                                 td= `${season.seasonTotalAppsB} (${season.seasonTotalGoalsB})`
+        if user
+            .text-center    
+                a.btn.btn-success(href=`/addseason/${player._id}/A` role="button" style="margin-top: 1rem; margin-right: 0.5rem") Add Season (A Team)
+                a.btn.btn-warning(href=`/addseason/${player._id}/B` role="button" style="margin-top: 1rem") Add Season (B Team)

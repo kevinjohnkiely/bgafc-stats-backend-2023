@@ -60,3 +60,19 @@ exports.addPlayer = (req, res) => {
     title: 'Add New Player',
   });
 };
+
+exports.addSeason = catchAsyncErrors(async (req, res, next) => {
+  // const player = await Player.findOne({ _id: req.params.playerId });
+  const player = await Player.findById(req.params.playerId);
+  const team = req.params.team;
+
+  if (!player) {
+    return next(new AppError('There is no player under that ID number!', 404));
+  }
+
+  res.status(200).render('addseason', {
+    title: `Add Season Data for Player: ${player.firstName} ${player.lastName}`,
+    player,
+    team,
+  });
+});

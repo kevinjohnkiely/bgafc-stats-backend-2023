@@ -15,7 +15,6 @@ const showAddPlayerAlert = (type, msg) => {
 const addPlayerForm = document.querySelector('.add-player-form');
 
 const addPlayer = async (playerData) => {
-  console.log('add player func');
   try {
     const res = await axios({
       method: 'POST',
@@ -53,7 +52,6 @@ if (addPlayerForm) {
       firstGoal,
       honours,
     };
-    console.log(playerObj);
     addPlayer(playerObj);
   });
 }

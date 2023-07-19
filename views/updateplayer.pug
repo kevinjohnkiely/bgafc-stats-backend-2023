@@ -2,7 +2,7 @@ extends base
 
 block content 
     .container-fluid 
-        h3.page-heading= `Updating Player: ${player.firstName} ${player.lastName}`
+        h3.page-heading#player-slug(data-slug=`${player.slug}`)= `Updating Player: ${player.firstName} ${player.lastName}`
         form(style="width: 80%; margin: auto").update-player-form
             .row
                 .col-md-4.col-sm-12
