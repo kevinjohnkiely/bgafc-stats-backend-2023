@@ -1,4 +1,5 @@
 const Player = require('../models/playerModel');
+const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
@@ -62,7 +63,6 @@ exports.addPlayer = (req, res) => {
 };
 
 exports.addSeason = catchAsyncErrors(async (req, res, next) => {
-  // const player = await Player.findOne({ _id: req.params.playerId });
   const player = await Player.findById(req.params.playerId);
   const team = req.params.team;
 
@@ -74,5 +74,18 @@ exports.addSeason = catchAsyncErrors(async (req, res, next) => {
     title: `Add Season Data for Player: ${player.firstName} ${player.lastName}`,
     player,
     team,
+  });
+});
+
+exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
+  const season = await Season.findById(req.params.seasonId);
+
+  if (!season) {
+    return next(new AppError('There is no season with that ID!', 404));
+  }
+
+  res.status(200).render('updateseason', {
+    title: 'Update Season',
+    season,
   });
 });

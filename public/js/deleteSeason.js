@@ -47,6 +47,14 @@ if (deleteSeasonBtns) {
   });
 }
 
+if (editSeasonBtns) {
+  editSeasonBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      location.assign(`http://localhost:1984/seasons/${btn.dataset.season}/edit`)
+    })
+  })
+}
+
 if (cancelDeleteSeason) {
   cancelDeleteSeason.addEventListener('click', () => {
     deleteSeasonModal.classList.remove('modal-show');
