@@ -58,6 +58,12 @@ body {
   margin-bottom: 1rem;
 }
 
+.page-subheading {
+  color: #339900;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .player-table {
   width: 88%;
   margin: auto;
@@ -73,6 +79,10 @@ body {
 .player-table a {
   color: #336600;
   text-decoration: none;
+}
+
+.player-table th a {
+  color: white;
 }
 
 .player-table a:hover {

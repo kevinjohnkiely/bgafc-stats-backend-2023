@@ -3,16 +3,24 @@ extends base
 block content
     .container-fluid 
         h3.page-heading All-Time Player Statistics 1984 – present
+        h5.page-subheading Click on headings to sort descending
         table.table.table-bordered.table-hover.player-table
             thead
                 tr 
-                    th(style="width: 50%; line-height: 2.2rem; text-align:left") Player 
-                    th A Team Apps 
-                    th A Team Goals 
-                    th B Team Apps 
-                    th B Team Goals 
-                    th Total Apps 
-                    th Total Goals
+                    th(style="width: 50%; line-height: 2.2rem; text-align:left")
+                        a(href='/players/sort/lastName') Player Name
+                    th
+                        a(href='/players/sort/-aTeamApps') A Team Apps
+                    th
+                        a(href='/players/sort/-aTeamGoals') A Team Goals
+                    th
+                        a(href='/players/sort/-bTeamApps') B Team Apps
+                    th
+                        a(href='/players/sort/-bTeamGoals') B Team Goals
+                    th
+                        a(href='/players/sort/-totalApps') Total Apps
+                    th
+                        a(href='/players/sort/-totalGoals') Total Goals
             tbody 
                 each player in players
                     tr

@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getPlayers,
+  getPlayersSorted,
   getPlayer,
   getLoginForm,
   loggedOutInfo,
@@ -15,6 +16,7 @@ const { isLoggedIn } = require('../middleware/isLoggedIn');
 const router = express.Router();
 
 router.get('/', isLoggedIn, getPlayers);
+router.get('/players/sort/:sorter', isLoggedIn, getPlayersSorted);
 router.get('/players/:slug', isLoggedIn, getPlayer);
 router.get('/players/:slug/edit', isLoggedIn, updatePlayer);
 router.get('/login', isLoggedIn, getLoginForm);

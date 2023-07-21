@@ -16,6 +16,15 @@ exports.getPlayers = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.getPlayersSorted = catchAsyncErrors(async (req, res, next) => {
+  const players = await Player.find().sort(req.params.sorter);
+
+  res.status(200).render('players', {
+    title: 'All Players',
+    players,
+  });
+})
+
 exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug }).populate(
     'seasons'
