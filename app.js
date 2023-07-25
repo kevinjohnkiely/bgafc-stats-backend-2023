@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // TEST MIDDLEWARE
 app.use((req, res, next) => {
-  console.log(req.cookies);
+  // console.log(req.cookies);
   next();
 });
 

@@ -8,6 +8,7 @@ block content
             .col-lg-2.col-md-4 
                 if player.image
                     img.player-image(src=`${player.image}` alt=`${player.firstName} ${player.lastName}`)
+                    a(href=`/addphoto/${player.slug}`) Add pic
                 else
                     img.player-image(src='/img/blank.jpg' alt=`${player.firstName} ${player.lastName}`)
             .col-lg-10.col-md-8 

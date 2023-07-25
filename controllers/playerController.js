@@ -13,7 +13,7 @@ cloudinary.config({
 });
 
 // Log the configuration
-console.log(cloudinary.config());
+// console.log(cloudinary.config());
 
 exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
   let players;

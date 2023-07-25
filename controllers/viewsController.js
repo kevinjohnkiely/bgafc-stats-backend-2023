@@ -23,7 +23,7 @@ exports.getPlayersSorted = catchAsyncErrors(async (req, res, next) => {
     title: 'All Players',
     players,
   });
-})
+});
 
 exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug }).populate(
@@ -96,5 +96,18 @@ exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
   res.status(200).render('updateseason', {
     title: 'Update Season',
     season,
+  });
+});
+
+exports.addPhoto = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findOne({ slug: req.params.slug });
+
+  if (!player) {
+    return next(new AppError('There is no player with that slug!', 404));
+  }
+
+  res.status(200).render('addphoto', {
+    title: 'Add/Edit Player Photo',
+    player,
   });
 });

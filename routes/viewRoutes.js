@@ -8,7 +8,8 @@ const {
   addPlayer,
   updatePlayer,
   addSeason,
-  updateSeason
+  updateSeason,
+  addPhoto
 } = require('../controllers/viewsController');
 const { protect } = require('../middleware/auth');
 const { isLoggedIn } = require('../middleware/isLoggedIn');
@@ -24,5 +25,6 @@ router.get('/logout', isLoggedIn, loggedOutInfo);
 router.get('/addplayer', protect, addPlayer);
 router.get('/addseason/:playerId/:team', protect, addSeason);
 router.get('/seasons/:seasonId/edit', protect, updateSeason);
+router.get('/addphoto/:slug', protect, addPhoto)
 
 module.exports = router;
