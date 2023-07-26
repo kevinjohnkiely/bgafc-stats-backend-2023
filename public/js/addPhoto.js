@@ -16,7 +16,6 @@ const addPhotoForm = document.querySelector('.add-photo-form');
 const slugDataItem = document.getElementById('playerSlug');
 
 const addPhoto = async (photoData) => {
-  //   console.log(photoData);
   try {
     // const res = await axios({
     //   method: 'POST',
@@ -45,6 +44,12 @@ const addPhoto = async (photoData) => {
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);
+    } else {
+      let errorMsg = '';
+      if (response.message === 'request entity too large') {
+        errorMsg = 'Image file too large, please try smaller one.';
+      }
+      showAddPhotoAlert('error', errorMsg);
     }
   } catch (error) {
     showAddPhotoAlert('error', error.message);
@@ -56,6 +61,11 @@ if (addPhotoForm) {
     e.preventDefault();
 
     const theFile = document.getElementById('photo').files[0];
+
+    if (!theFile) {
+      showAddPhotoAlert('error', 'Please choose a photo!');
+    }
+
     const fileNameStr = theFile.name.split('.')[0];
 
     const reader = new FileReader();
