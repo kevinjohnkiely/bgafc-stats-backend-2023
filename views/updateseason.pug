@@ -90,6 +90,6 @@ block content
                         input.form-control(type='number' id='hoganc_goals' value=`${season.hoganc_goals}` min=0)
             .text-center
                 button.btn.btn-success.btn-lg(type='submit') Update Season
-                a.btn.btn-outline-danger.btn-lg(href='/' role="button" style="margin-left: 0.7rem") Go Back
+                a.btn.btn-outline-danger.btn-lg(href=`/players/${player.slug}` role="button" style="margin-left: 0.7rem") Go Back
     //- script(src="/js/utils/formValidation.js") 
     script(src="/js/updateSeason.js") 

@@ -18,7 +18,7 @@ const updatePlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${slugDataItem.dataset.slug}`,
+      url: `http://localhost:1984/api/v1/players/${slugDataItem.dataset.slug}`,
       data: playerData,
     });
     console.log(res.data);
@@ -26,7 +26,7 @@ const updatePlayer = async (playerData) => {
     if (res.data.status === 'success') {
       showUpdatePlayerAlert('success', 'Player updated!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign(`/players/${slugDataItem.dataset.slug}`);
       }, 1500);
     }
   } catch (error) {

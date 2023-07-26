@@ -18,7 +18,7 @@ const login = async (username, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'https://bgafc-stats-2023.cyclic.app/api/v1/users/login',
+      url: 'http://localhost:1984/api/v1/users/login',
       data: {
         username,
         password,
@@ -49,7 +49,7 @@ const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'https://bgafc-stats-2023.cyclic.app/api/v1/users/logout',
+      url: 'http://localhost:1984/api/v1/users/logout',
     });
     if ((res.data.status = 'success')) {
       // location.reload(true);

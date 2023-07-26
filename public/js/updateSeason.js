@@ -19,7 +19,7 @@ const updateSeason = async (seasonData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `https://bgafc-stats-2023.cyclic.app/api/v1/seasons/${seasonDataItem.dataset.seasonid}`,
+      url: `http://localhost:1984/api/v1/seasons/${seasonDataItem.dataset.seasonid}`,
       data: seasonData,
     });
 

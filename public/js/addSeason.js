@@ -15,11 +15,10 @@ const addSeasonForm = document.querySelector('.add-season-form');
 const seasonPlayerId = document.getElementById('playerId');
 
 const addSeason = async (seasonData) => {
-  console.log(seasonPlayerId.dataset.playerid);
   try {
     const res = await axios({
       method: 'POST',
-      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${seasonPlayerId.dataset.playerid}/seasons`,
+      url: `http://localhost:1984/api/v1/players/${seasonPlayerId.dataset.playerid}/seasons`,
       data: seasonData,
     });
 

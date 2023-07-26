@@ -2,7 +2,7 @@ extends base
 
 block content 
     .container-fluid 
-        h3.page-heading#playerId(data-playerid=`${player._id}` data-team=`${team}` data-slug=`${player.slug}`)= `Add Season for ${player.firstName} ${player.lastName}`
+        h3.page-heading#playerId(data-playerid=`${player._id}` data-team=`${team}` data-slug=`${player.slug}`)= `Add Season (${team} Team) for ${player.firstName} ${player.lastName}`
         form(style="width: 80%; margin: auto").add-season-form
             .row 
                 .col-md-2.col-sm-6 
@@ -90,6 +90,6 @@ block content
                         input.form-control(type='number' id='hoganc_goals' min=0 value=0)
             .text-center
                 button.btn.btn-success.btn-lg(type='submit') Add Season
-                a.btn.btn-outline-danger.btn-lg(href='/' role="button" style="margin-left: 0.7rem") Go Back
+                a.btn.btn-outline-danger.btn-lg(href=`/players/${player.slug}` role="button" style="margin-left: 0.7rem") Go Back
     //- script(src="/js/utils/formValidation.js") 
     script(src="/js/addSeason.js") 
