@@ -18,7 +18,7 @@ const addPlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:1984/api/v1/players',
+      url: 'https://bgafc-stats-2023.cyclic.app/api/v1/players',
       data: playerData,
     });
 

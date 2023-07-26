@@ -19,12 +19,13 @@ const addPhoto = async (photoData) => {
   try {
     // const res = await axios({
     //   method: 'POST',
-    //   url: `http://localhost:1984/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+    //   url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
     //   data: photoData,
     // });
+    // https://bgafc-stats-2023.cyclic.app/api/v1/players
 
     const res = await fetch(
-      `http://localhost:1984/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+      `https://bgafc-stats-2023.cyclic.app/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
       {
         method: 'POST',
         body: JSON.stringify({

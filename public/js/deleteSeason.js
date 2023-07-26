@@ -21,7 +21,7 @@ const deleteSeason = async (seasonId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://localhost:1984/api/v1/seasons/${seasonId}`,
+      url: `https://bgafc-stats-2023.cyclic.app/api/v1/seasons/${seasonId}`,
     });
 
     showDeleteSeasonAlert('success', 'Season deleted!');
@@ -50,9 +50,11 @@ if (deleteSeasonBtns) {
 if (editSeasonBtns) {
   editSeasonBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      location.assign(`http://localhost:1984/seasons/${btn.dataset.season}/edit`)
-    })
-  })
+      location.assign(
+        `https://bgafc-stats-2023.cyclic.app/seasons/${btn.dataset.season}/edit`
+      );
+    });
+  });
 }
 
 if (cancelDeleteSeason) {

@@ -18,7 +18,7 @@ const updatePlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `http://localhost:1984/api/v1/players/${slugDataItem.dataset.slug}`,
+      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${slugDataItem.dataset.slug}`,
       data: playerData,
     });
     console.log(res.data);
