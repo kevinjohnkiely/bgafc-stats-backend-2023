@@ -4,6 +4,12 @@ block content
     .container-fluid 
         h3.page-heading All-Time Player Statistics 1984 – present
         h5.page-subheading Click on headings to sort descending
+        form.search-player-form(style='margin: auto; margin-bottom:1rem; width: 50%;')
+            .row.justify-content-center
+                .col-sm-6
+                    input.form-control(type='text' required id='search_players' placeholder='Search players...' style='border: 1px solid #336600')
+                .col-sm-3
+                    button.btn.btn-success(type='submit') Search
         table.table.table-bordered.table-hover.player-table
             thead
                 tr 
@@ -22,6 +28,8 @@ block content
                     th
                         a(href='/players/sort/-totalGoals') Total Goals
             tbody 
+                if players.length === 0
+                    h4(style='text-align:center; color: red') No Players found! Try again.
                 each player in players
                     tr
                         td(style='text-align:left') 
@@ -54,4 +62,5 @@ block content
                         button.btn.btn-danger.delete-player-btn Yes, Delete! 
                         button.btn.btn-primary.cancel-delete-player Cancel
     script(src="/js/deletePlayer.js") 
+    script(src="/js/searchPlayers.js") 
                     

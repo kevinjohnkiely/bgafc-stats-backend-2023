@@ -2,6 +2,7 @@ const express = require('express');
 const {
   getPlayers,
   getPlayersSorted,
+  getPlayersSearch,
   getPlayer,
   getLoginForm,
   loggedOutInfo,
@@ -18,8 +19,9 @@ const router = express.Router();
 
 router.get('/', isLoggedIn, getPlayers);
 router.get('/players/sort/:sorter', isLoggedIn, getPlayersSorted);
+router.get('/players/search/:term', isLoggedIn, getPlayersSearch);
 router.get('/players/:slug', isLoggedIn, getPlayer);
-router.get('/players/:slug/edit', isLoggedIn, updatePlayer);
+router.get('/players/:slug/edit', protect, updatePlayer);
 router.get('/login', isLoggedIn, getLoginForm);
 router.get('/logout', isLoggedIn, loggedOutInfo);
 router.get('/addplayer', protect, addPlayer);
