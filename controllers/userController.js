@@ -11,19 +11,6 @@ const signToken = (id) => {
   });
 };
 
-// exports.getAuthUser = catchAsyncErrors(async (req, res, next) => {
-//   const authUser = req.session.userId;
-
-//   const loggedInUser = await User.findById(authUser);
-
-//   res.status(200).json({
-//     status: 'success',
-//     data: {
-//       user: loggedInUser,
-//     },
-//   });
-// });
-
 exports.signUp = catchAsyncErrors(async (req, res, next) => {
   const { username } = req.body;
   const passwordRaw = req.body.password;

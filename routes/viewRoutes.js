@@ -3,6 +3,7 @@ const {
   getPlayers,
   getPlayersSorted,
   getPlayersSearch,
+  getPlayersSortSearch,
   getPlayer,
   getLoginForm,
   loggedOutInfo,
@@ -20,6 +21,7 @@ const router = express.Router();
 router.get('/', isLoggedIn, getPlayers);
 router.get('/players/sort/:sorter', isLoggedIn, getPlayersSorted);
 router.get('/players/search/:term', isLoggedIn, getPlayersSearch);
+// router.get('/players/sort/:sorter/search/:term', isLoggedIn, getPlayersSortSearch)
 router.get('/players/:slug', isLoggedIn, getPlayer);
 router.get('/players/:slug/edit', protect, updatePlayer);
 router.get('/login', isLoggedIn, getLoginForm);

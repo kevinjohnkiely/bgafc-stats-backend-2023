@@ -2,8 +2,11 @@ extends base
 
 block content 
     .container-fluid.player-single-container 
-        .row 
-            h3.player-single-heading=`${player.firstName} ${player.lastName}`
+        .row.justify-content-between
+            .col-4
+                h3.player-single-heading=`${player.firstName} ${player.lastName}`
+            .col-4
+                a.btn.btn-success(href='/' role="button") << Back To All Players
         .row 
             .col-lg-2.col-md-4 
                 if player.image
@@ -43,7 +46,8 @@ block content
                         th Hogan C
                         th Total
                 tbody 
-                    each season in player.seasons 
+                    - const sortedSeasons = player.seasons.sort((a, b) => parseInt(a.season.slice(0, 4)) - parseInt(b.season.slice(0, 4)))
+                    each season in sortedSeasons
                         tr 
                             td= season.season
                                 if user

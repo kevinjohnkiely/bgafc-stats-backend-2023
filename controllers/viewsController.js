@@ -27,13 +27,26 @@ exports.getPlayersSorted = catchAsyncErrors(async (req, res, next) => {
 
 exports.getPlayersSearch = catchAsyncErrors(async (req, res, next) => {
   // db.collection.find({name:{'$regex' : req.params.term, '$options' : 'i'}})
-  const players = await Player.find({ lastName: {'$regex' : req.params.term, '$options' : 'i'} });
+  const players = await Player.find({
+    lastName: { $regex: req.params.term, $options: 'i' },
+  });
 
   res.status(200).render('players', {
     title: 'All Players',
     players,
   });
 });
+
+// exports.getPlayersSortSearch = catchAsyncErrors(async (req, res, next) => {
+//   const players = await Player.find({
+//     lastName: { $regex: req.params.term, $options: 'i' },
+//   }).sort(req.params.sorter);
+
+//   res.status(200).render('players', {
+//     title: 'All Players',
+//     players,
+//   });
+// });
 
 exports.getPlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug }).populate(
