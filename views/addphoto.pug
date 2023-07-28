@@ -7,5 +7,5 @@ block content
             input(type='file', accept='image/*', id='photo', name='photo')
             .text-center
                 button.btn.btn-success.btn-lg(type='submit') Add Photo
-                a.btn.btn-outline-danger.btn-lg(href='/' role="button" style="margin-left: 0.7rem") Go Back
+                a.btn.btn-outline-danger.btn-lg(href=`/players/${player.slug}` role="button" style="margin-left: 0.7rem") Go Back
     script(src="/js/addPhoto.js") 

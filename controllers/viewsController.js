@@ -111,6 +111,7 @@ exports.addSeason = catchAsyncErrors(async (req, res, next) => {
 
 exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
   const season = await Season.findById(req.params.seasonId);
+  const player = await Player.findOne({ slug: req.params.playerSlug });
 
   if (!season) {
     return next(new AppError('There is no season with that ID!', 404));
@@ -119,6 +120,7 @@ exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
   res.status(200).render('updateseason', {
     title: 'Update Season',
     season,
+    player,
   });
 });
 

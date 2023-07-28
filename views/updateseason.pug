@@ -2,7 +2,7 @@ extends base
 
 block content 
     .container-fluid 
-        h3.page-heading#seasonId(data-seasonid=`${season._id}`)= `Update Season ${season._id}`
+        h3.page-heading#seasonId(data-seasonid=`${season._id}`)= `Update Season ${season.season} for ${player.firstName} ${player.lastName}`
         form(style="width: 80%; margin: auto").update-season-form
             .row 
                 .col-md-2.col-sm-6 

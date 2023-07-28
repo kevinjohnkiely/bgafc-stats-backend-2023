@@ -8,17 +8,20 @@ block content
             .col-4
                 a.btn.btn-success(href='/' role="button") << Back To All Players
         .row 
-            .col-lg-2.col-md-4 
+            .col-lg-3.col-md-4 
                 if player.image
                     img.player-image(src=`${player.image}` alt=`${player.firstName} ${player.lastName}`)
                     if user
-                        a(href=`/addphoto/${player.slug}` style='color: #336600') Add/Change Photo
-                            
+                        a(href=`/addphoto/${player.slug}`)
+                            i.fa-solid.fa-pen-to-square.edit-season(style='margin-left: 0.7rem; color:#336600; font-size: 1.3rem')
                 else
                     img.player-image(src='/img/blank.jpg' alt=`${player.firstName} ${player.lastName}`)
-            .col-lg-10.col-md-8 
+            .col-lg-9.col-md-8 
                 ul.player-details 
                     li.green-bold= `Appearances: ${player.totalApps} Goals: ${player.totalGoals}`
+                        if user
+                            a(href=`/players/${player.slug}/edit`)
+                                i.fa-solid.fa-pen-to-square.edit-season(style='margin-left: 0.7rem; color:#336600; font-size: 1.3rem')
                     li= `Date of Birth: ${player.dateOfBirth}`
                     li= `Position: ${player.position}`
                     li= `Debut: ${player.debut}`
@@ -52,8 +55,8 @@ block content
                             td= season.season
                                 if user
                                     span.player-btns 
-                                        i.fa-solid.fa-circle-xmark.delete-season(data-season=`${season._id}`, style='color:red; font-size: 1.3rem')
-                                        i.fa-solid.fa-pen-to-square.edit-season(data-season=`${season._id}`, style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
+                                        i.fa-solid.fa-circle-xmark.delete-season(data-season=`${season._id}` style='color:red; font-size: 1.3rem')
+                                        i.fa-solid.fa-pen-to-square.edit-season(data-season=`${season._id}` data-player=`${player.slug}` style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
                             td= season.team
                             td= season.division
                             td= `${season.lge_apps} (${season.lge_goals})`
