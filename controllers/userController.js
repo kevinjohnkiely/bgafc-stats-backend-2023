@@ -40,10 +40,10 @@ exports.signUp = catchAsyncErrors(async (req, res, next) => {
 
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { username, password } = req.body;
-  console.log(`REQ BODY IS: ${req.body}`);
+  console.log(`CREDS ARE ${username}, ${password}`);
 
   if (!username || !password) {
-    console.log(`CREDS ARE ${username}, ${password}`);
+    console.log(`FAILED CREDS ARE ${username}, ${password}`);
     return next(new AppError('Parameters missing! Try again...', 400));
   }
 
