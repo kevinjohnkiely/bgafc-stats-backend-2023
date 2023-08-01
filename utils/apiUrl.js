@@ -1,2 +1,2 @@
-const url = 'https://bgafc-stats-2023.cyclic.app/';
-// export const url = 'https://bgafc-stats-2023.cyclic.app/';
+const url = 'https://bgafc-stats.onrender.com/';
+// export const url = 'https://bgafc-stats.onrender.com/';

@@ -21,7 +21,7 @@ const deletePlayer = async (slug) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://bgafc-stats-2023.cyclic.app/api/v1/players/${slug}`,
+      url: `https://bgafc-stats.onrender.com/api/v1/players/${slug}`,
     });
 
     showDeletePlayerAlert('success', 'Player deleted!');
@@ -51,7 +51,7 @@ if (editPlayerBtns) {
     btn.addEventListener('click', () => {
       console.log(btn.dataset.slug);
       location.assign(
-        `https://bgafc-stats-2023.cyclic.app/players/${btn.dataset.slug}/edit`
+        `https://bgafc-stats.onrender.com/players/${btn.dataset.slug}/edit`
       );
     });
   });
