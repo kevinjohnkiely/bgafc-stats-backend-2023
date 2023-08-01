@@ -40,12 +40,16 @@ exports.signUp = catchAsyncErrors(async (req, res, next) => {
 
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { username, password } = req.body;
+  console.log(`REQ BODY IS: ${req.body}`);
 
   if (!username || !password) {
+    console.log(`CREDS ARE ${username}, ${password}`);
     return next(new AppError('Parameters missing! Try again...', 400));
   }
 
   const user = await User.findOne({ username: username }).select('+password');
+
+  console.log(`THE USER IS: ${user}`);
 
   if (!user) {
     return next(new AppError('Invalid login credentials! Try again...', 401));

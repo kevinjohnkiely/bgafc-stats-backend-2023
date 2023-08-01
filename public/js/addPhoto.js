@@ -22,6 +22,7 @@ const addPhoto = async (photoData) => {
     //   data: photoData,
     // });
     // https://bgafc-stats-2023.cyclic.app/api/v1/players
+    // https://bgafc-stats-2023.cyclic.app/
 
     const res = await fetch(
       `https://bgafc-stats-2023.cyclic.app/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
