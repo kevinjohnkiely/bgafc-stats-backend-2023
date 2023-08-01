@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 // const cors = require('cors');
 
 const morgan = require('morgan');
-const AppError = require('./utils/errorHandling/appError').default;
+const AppError = require('./utils/errorHandling/appError');
 const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 
 const playerRouter = require('./routes/playerRoutes');
