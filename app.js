@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 // const cors = require('cors');
 
 const morgan = require('morgan');
-const AppError = require('./utils/errorHandling/appError');
+const AppError = require('./utils/errorHandling/appError').default;
 const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 
 const playerRouter = require('./routes/playerRoutes');
@@ -60,7 +60,7 @@ app.use(
       fontSrc: ["'self'", 'https:', 'http:', 'data:'],
       scriptSrc: ["'self'", 'https:', 'http:', 'blob:'],
       styleSrc: ["'self'", "'unsafe-inline'", 'https:', 'http:'],
-      "img-src": ["'self'", "https: data: blob:"],
+      'img-src': ["'self'", 'https: data: blob:'],
     },
   })
 );
