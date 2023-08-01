@@ -5,6 +5,7 @@ const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
 const signToken = (id) => {
+  console.log(`JWT SECRET is ${process.env.JWT_SECRET}`);
   console.log(id);
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
