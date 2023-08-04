@@ -2,7 +2,7 @@ extends base
 
 block content 
     .container-fluid 
-        h3.page-heading#seasonId(data-seasonid=`${season._id}`)= `Update Season ${season.season} for ${player.firstName} ${player.lastName}`
+        h3.page-heading#seasonId(data-seasonid=`${season._id}` data-playerslug=`${player.slug}`)= `Update Season ${season.season} for ${player.firstName} ${player.lastName}`
         form(style="width: 80%; margin: auto").update-season-form
             .row 
                 .col-md-2.col-sm-6 
@@ -91,5 +91,4 @@ block content
             .text-center
                 button.btn.btn-success.btn-lg(type='submit') Update Season
                 a.btn.btn-outline-danger.btn-lg(href=`/players/${player.slug}` role="button" style="margin-left: 0.7rem") Go Back
-    //- script(src="/js/utils/formValidation.js") 
     script(src="/js/updateSeason.js") 

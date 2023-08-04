@@ -26,7 +26,7 @@ const updateSeason = async (seasonData) => {
     if (res.data.status === 'success') {
       showUpdateSeasonAlert('success', 'Season updated!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign(`/players/${seasonDataItem.dataset.playerslug}`);
       }, 1500);
     }
   } catch (error) {
@@ -38,7 +38,6 @@ if (updateSeasonForm) {
   updateSeasonForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const season = document.getElementById('season').value;
-    //   const team = seasonPlayerId.dataset.team;
     const division = document.getElementById('division').value;
     const lge_apps = parseInt(document.getElementById('lge_apps').value);
     const lge_goals = parseInt(document.getElementById('lge_goals').value);
@@ -62,7 +61,6 @@ if (updateSeasonForm) {
     );
     const seasonObj = {
       season,
-      // team,
       division,
       lge_apps,
       lge_goals,
@@ -91,7 +89,6 @@ console.log(divSel);
 const divisionArr = divisionSelect.childNodes;
 divisionArr.forEach((element) => {
   if (element.value === divSel) {
-    console.log('found');
     element.setAttribute('selected', '');
   }
 });
