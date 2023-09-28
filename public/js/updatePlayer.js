@@ -18,7 +18,7 @@ const updatePlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `https://bgafc-stats.onrender.com/api/v1/players/${slugDataItem.dataset.slug}`,
+      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${slugDataItem.dataset.slug}`,
       data: playerData,
     });
     console.log(res.data);

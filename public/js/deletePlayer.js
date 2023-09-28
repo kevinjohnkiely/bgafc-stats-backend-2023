@@ -21,7 +21,7 @@ const deletePlayer = async (slug) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://bgafc-stats.onrender.com/api/v1/players/${slug}`,
+      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${slug}`,
     });
 
     showDeletePlayerAlert('success', 'Player deleted!');

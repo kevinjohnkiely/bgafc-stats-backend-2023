@@ -19,7 +19,7 @@ const updateSeason = async (seasonData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `https://bgafc-stats.onrender.com/api/v1/seasons/${seasonDataItem.dataset.seasonid}`,
+      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/seasons/${seasonDataItem.dataset.seasonid}`,
       data: seasonData,
     });
 

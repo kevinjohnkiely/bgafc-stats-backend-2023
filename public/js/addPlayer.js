@@ -18,7 +18,7 @@ const addPlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'https://bgafc-stats.onrender.com/api/v1/players',
+      url: 'https://ballingarryafcstats.cyclic.cloud/api/v1/players',
       data: playerData,
     });
 

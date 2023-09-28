@@ -18,14 +18,15 @@ const addPhoto = async (photoData) => {
   try {
     // const res = await axios({
     //   method: 'POST',
-    //   url: `https://bgafc-stats.onrender.com/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+    //   url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
     //   data: photoData,
     // });
-    // https://bgafc-stats.onrender.com/api/v1/players
+    // https://ballingarryafcstats.cyclic.cloud/api/v1/players
     // https://bgafc-stats.onrender.com/
+    // https://ballingarryafcstats.cyclic.cloud/api/v1/players
 
     const res = await fetch(
-      `https://bgafc-stats.onrender.com/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+      `https://ballingarryafcstats.cyclic.cloud/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
       {
         method: 'POST',
         body: JSON.stringify({

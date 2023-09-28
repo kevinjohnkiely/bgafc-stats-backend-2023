@@ -21,7 +21,7 @@ const deleteSeason = async (seasonId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://bgafc-stats.onrender.com/api/v1/seasons/${seasonId}`,
+      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/seasons/${seasonId}`,
     });
 
     showDeleteSeasonAlert('success', 'Season deleted!');
