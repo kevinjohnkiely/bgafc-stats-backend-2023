@@ -51,7 +51,7 @@ if (editSeasonBtns) {
   editSeasonBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       location.assign(
-        `https://bgafc-stats.onrender.com/seasons/${btn.dataset.season}/edit/${btn.dataset.player}`
+        `https://ballingarryafcstats.cyclic.cloud/api/v1/seasons/${btn.dataset.season}/edit/${btn.dataset.player}`
       );
     });
   });

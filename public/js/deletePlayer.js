@@ -51,7 +51,7 @@ if (editPlayerBtns) {
     btn.addEventListener('click', () => {
       console.log(btn.dataset.slug);
       location.assign(
-        `https://bgafc-stats.onrender.com/players/${btn.dataset.slug}/edit`
+        `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${btn.dataset.slug}/edit`
       );
     });
   });

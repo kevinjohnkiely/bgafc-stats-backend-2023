@@ -22,8 +22,6 @@ const addPhoto = async (photoData) => {
     //   data: photoData,
     // });
     // https://ballingarryafcstats.cyclic.cloud/api/v1/players
-    // https://bgafc-stats.onrender.com/
-    // https://ballingarryafcstats.cyclic.cloud/api/v1/players
 
     const res = await fetch(
       `https://ballingarryafcstats.cyclic.cloud/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
