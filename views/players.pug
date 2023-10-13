@@ -2,6 +2,9 @@ extends base
 
 block content
     .container-fluid 
+        if user
+            .text-center
+                a.btn.btn-success(href='/addplayer' role="button" style="margin-bottom: 1rem") Add Player
         h3.page-heading All-Time Player Statistics 1984 – present
         h5.page-subheading Click on headings to sort descending
         form.search-player-form(style='margin: auto; margin-bottom:1rem; width: 50%;')

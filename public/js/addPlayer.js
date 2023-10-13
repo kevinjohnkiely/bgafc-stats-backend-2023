@@ -23,9 +23,10 @@ const addPlayer = async (playerData) => {
     });
 
     if (res.data.status === 'success') {
+      console.log(res.data.data.player.slug);
       showAddPlayerAlert('success', 'Player added!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign(`/players/${res.data.data.player.slug}`);
       }, 1500);
     }
   } catch (error) {
