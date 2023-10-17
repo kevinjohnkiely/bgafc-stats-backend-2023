@@ -25,7 +25,17 @@ block content
                 .col-md-6.col-sm-12 
                     .mb-3 
                         label.form-label(for='position') Position: 
-                        input.form-control(type='text' value=`${player.position}` id='position')
+                        select.form-control(name='position' id='position' required)
+                            option(value='Goalkeeper') Goalkeeper
+                            option(value='Defender') Defender
+                            option(value='Left Full Back') Left Full Back
+                            option(value='Right Full Back') Right Full Back
+                            option(value='Centre Half') Centre Half
+                            option(value='Utilty') Utilty
+                            option(value='Midfield') Midfield
+                            option(value='Winger') Winger
+                            option(value='Striker') Striker
+                            option(value='Forward') Forward
             .row 
                 .col-md-6.col-sm-12 
                     .mb-3 
