@@ -13,6 +13,8 @@ const showAddSeasonAlert = (type, msg) => {
 // DOM ELEMENTS
 const addSeasonForm = document.querySelector('.add-season-form');
 const seasonPlayerId = document.getElementById('playerId');
+const theSeason = document.getElementById('season');
+theSeason.focus();
 
 const addSeason = async (seasonData) => {
   try {
