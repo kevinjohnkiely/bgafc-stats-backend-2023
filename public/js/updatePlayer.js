@@ -13,6 +13,7 @@ const showUpdatePlayerAlert = (type, msg) => {
 // DOM elements
 const updatePlayerForm = document.querySelector('.update-player-form');
 const slugDataItem = document.getElementById('player-slug');
+const positionSelect = document.getElementById('position');
 
 const updatePlayer = async (playerData) => {
   try {
@@ -59,3 +60,12 @@ if (updatePlayerForm) {
     updatePlayer(playerObj);
   });
 }
+
+// Code to ensure previous Position entry is loaded into dropdown list
+const posSel = positionSelect.dataset.possel;
+const positionArr = positionSelect.childNodes;
+positionArr.forEach((element) => {
+  if (element.value === posSel) {
+    element.setAttribute('selected', '');
+  }
+});

@@ -85,7 +85,6 @@ if (updateSeasonForm) {
 
 // Code to ensure previous Division entry is loaded into dropdown list
 const divSel = divisionSelect.dataset.divsel;
-console.log(divSel);
 const divisionArr = divisionSelect.childNodes;
 divisionArr.forEach((element) => {
   if (element.value === divSel) {
