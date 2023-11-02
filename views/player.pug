@@ -59,18 +59,18 @@ block content
                                         i.fa-solid.fa-pen-to-square.edit-season(data-season=`${season._id}` data-player=`${player.slug}` style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
                             td= season.team
                             td= season.division
-                            td= `${season.lge_apps} (${season.lge_goals})`
-                            td= `${season.fai_apps} (${season.fai_goals})`
-                            td= `${season.mjc_apps} (${season.mjc_goals})`
-                            td= `${season.msc_apps} (${season.msc_goals})`
-                            td= `${season.desc_apps} (${season.desc_goals})`
-                            td= `${season.lgec_apps} (${season.lgec_goals})`
-                            td= `${season.reidyc_apps} (${season.reidyc_goals})`
-                            td= `${season.hoganc_apps} (${season.hoganc_goals})`
+                            td= `${season.lge_apps} ${season.lge_goals == '0' ? `` : `(${season.lge_goals})`}`
+                            td= `${season.fai_apps} ${season.fai_goals == '0' ? `` : `(${season.fai_goals})`}`
+                            td= `${season.mjc_apps} ${season.mjc_goals == '0' ? `` : `(${season.mjc_goals})`}`
+                            td= `${season.msc_apps} ${season.msc_goals == '0' ? `` : `(${season.msc_goals})`}`
+                            td= `${season.desc_apps} ${season.desc_goals == '0' ? `` : `(${season.desc_goals})`}`
+                            td= `${season.lgec_apps} ${season.lgec_goals == '0' ? `` : `(${season.lgec_goals})`}`
+                            td= `${season.reidyc_apps} ${season.reidyc_goals == '0' ? `` : `(${season.reidyc_goals})`}`
+                            td= `${season.hoganc_apps} ${season.hoganc_goals == '0' ? `` : `(${season.hoganc_goals})`}`
                             - if (season.team === 'A')
-                                td= `${season.seasonTotalAppsA} (${season.seasonTotalGoalsA})`
+                                td= `${season.seasonTotalAppsA} ${season.seasonTotalGoalsA == '0' ? `` : `(${season.seasonTotalGoalsA})`}`
                             - if (season.team === 'B')
-                                td= `${season.seasonTotalAppsB} (${season.seasonTotalGoalsB})`
+                                td= `${season.seasonTotalAppsB} ${season.seasonTotalGoalsB == '0' ? `` : `(${season.seasonTotalGoalsB})`}`
         if user
             .text-center    
                 a.btn.btn-success(href=`/addseason/${player._id}/A` role="button" style="margin-top: 1rem; margin-right: 0.5rem") Add Season (A Team)
