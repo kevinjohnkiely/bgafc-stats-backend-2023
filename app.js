@@ -16,6 +16,8 @@ const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 const playerRouter = require('./routes/playerRoutes');
 const userRouter = require('./routes/userRoutes');
 const seasonRouter = require('./routes/seasonRoutes');
+const hattricksRouter = require('../routes/hattricksRoutes');
+
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -82,9 +84,11 @@ app.use((req, res, next) => {
 
 // MOUNTING THE ROUTES
 app.use('/', viewRouter);
+
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
+app.use('/api/v1/hattricks', hattricksRouter)
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
