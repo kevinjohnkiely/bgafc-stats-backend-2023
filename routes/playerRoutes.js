@@ -7,6 +7,7 @@ const {
   updatePlayer,
   deletePlayer,
   uploadPhoto,
+  getPlayersWithHattricks,
 } = require('../controllers/playerController');
 
 const upload = require('../middleware/multer');
@@ -20,6 +21,7 @@ const router = express.Router();
 router.use('/:playerId/seasons', seasonRouter);
 
 router.route('/').get(getAllPlayers).post(protect, createPlayer);
+router.route('/hat-tricks').get(getPlayersWithHattricks);
 router
   .route('/uploadphoto/:playerSlug')
   .post(protect, upload.single('photo'), uploadPhoto);

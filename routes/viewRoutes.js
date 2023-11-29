@@ -10,7 +10,8 @@ const {
   updatePlayer,
   addSeason,
   updateSeason,
-  addPhoto
+  addPhoto,
+  addHattrick
 } = require('../controllers/viewsController');
 const { protect } = require('../middleware/auth');
 const { isLoggedIn } = require('../middleware/isLoggedIn');
@@ -28,5 +29,6 @@ router.get('/addplayer', protect, addPlayer);
 router.get('/addseason/:playerId/:team', protect, addSeason);
 router.get('/seasons/:seasonId/edit/:playerSlug', protect, updateSeason);
 router.get('/addphoto/:slug', protect, addPhoto)
+router.get('/addhattrick/:playerId', protect, addHattrick);
 
 module.exports = router;

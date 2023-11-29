@@ -16,7 +16,7 @@ const globalErrorHandler = require('./utils/errorHandling/globalErrorHandler');
 const playerRouter = require('./routes/playerRoutes');
 const userRouter = require('./routes/userRoutes');
 const seasonRouter = require('./routes/seasonRoutes');
-const hattricksRouter = require('../routes/hattricksRoutes');
+const hattricksRouter = require('./routes/hattricksRoutes');
 
 const viewRouter = require('./routes/viewRoutes');
 

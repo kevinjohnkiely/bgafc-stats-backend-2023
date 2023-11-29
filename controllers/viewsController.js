@@ -83,6 +83,7 @@ exports.addPlayer = (req, res) => {
   });
 };
 
+// SEASONS
 exports.addSeason = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findById(req.params.playerId);
   const team = req.params.team;
@@ -113,6 +114,21 @@ exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// HAT-TRICKS
+exports.addHattrick = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findById(req.params.playerId);
+
+  if (!player) {
+    return next(new AppError('There is no player under that ID number!', 404));
+  }
+
+  res.status(200).render('addseason', {
+    title: `Add Hat-trick for Player: ${player.firstName} ${player.lastName}`,
+    player
+  });
+});
+
+// PROFILE PHOTO
 exports.addPhoto = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.slug });
 

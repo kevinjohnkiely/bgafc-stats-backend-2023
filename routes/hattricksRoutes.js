@@ -1,6 +1,7 @@
 const express = require('express');
 
 const {
+  getAllHattricks,
   getHattricksByPlayer,
   createHattrick,
   updateHattrick,
@@ -11,7 +12,7 @@ const { protect } = require('../middleware/auth');
 
 const router = express.Router({ mergeParams: true });
 
-router.route('/').get(getHattricksByPlayer).post(protect, createHattrick);
+router.route('/').get(getAllHattricks).post(protect, createHattrick);
 router
   .route('/:hattrickId')
   .patch(protect, updateHattrick)

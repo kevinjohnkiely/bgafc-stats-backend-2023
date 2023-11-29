@@ -90,12 +90,18 @@ const playerSchema = new mongoose.Schema(
   }
 );
 
-// Virtual populate
+// Virtual populates
 playerSchema.virtual('seasons', {
   ref: 'Season',
   foreignField: 'player',
   localField: '_id',
 });
+
+playerSchema.virtual('hattricks', {
+  ref: 'Hattrick',
+  foreignField: 'player',
+  localField: '_id',
+})
 
 const Player = mongoose.model('Player', playerSchema);
 
