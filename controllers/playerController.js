@@ -32,19 +32,19 @@ exports.getAllPlayers = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.getPlayersWithHattricks = catchAsyncErrors(async (req, res, next) => {
-  const players = await Player.find().populate('hattricks');
+// exports.getPlayersWithHattricks = catchAsyncErrors(async (req, res, next) => {
+//   const players = await Player.find().populate('hattricks');
 
-  const playersRes = players.filter(player => player.hattricks.length !== 0); 
+//   const playersRes = players.filter(player => player.hattricks.length !== 0); 
 
-  res.status(200).json({
-    status: 'success',
-    numOfPlayers: playersRes.length,
-    data: {
-      playersRes,
-    },
-  });
-});
+//   res.status(200).json({
+//     status: 'success',
+//     numOfPlayers: playersRes.length,
+//     data: {
+//       playersRes,
+//     },
+//   });
+// });
 
 exports.getOnePlayer = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findOne({ slug: req.params.playerSlug }).populate(

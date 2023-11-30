@@ -2,15 +2,10 @@ const Hattrick = require('../models/hattricksModel');
 const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
+const Player = require('../models/playerModel');
 
+// THIS ROUTE IS NOT USED IN FRONTEND, ONLY FOR POSTMAN TESTING
 exports.getAllHattricks = catchAsyncErrors(async (req, res, next) => {
-  // const hattricks = await Hattrick.find();
-  // const hattricks = await Hattrick.aggregate([
-  //   {
-  //     $group: { _id: '$player' },
-  //   },
-  // ])
-
   const hattricks = await Hattrick.find();
 
   res.status(200).json({
@@ -22,20 +17,23 @@ exports.getAllHattricks = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-exports.getHattricksByPlayer = catchAsyncErrors(async (req, res, next) => {
-  const seasons = await Season.find({ player: req.params.playerId });
+exports.getPlayersWithHattricks = catchAsyncErrors(async (req, res, next) => {
+  const players = await Player.find()
+    .populate('hattricks')
+    .select('image firstName lastName');
+
+  const playersRes = players.filter((player) => player.hattricks.length !== 0);
 
   res.status(200).json({
     status: 'success',
-    numOfHattricks: hattricks.length,
+    numOfPlayers: playersRes.length,
     data: {
-      seasons,
+      playersRes,
     },
   });
 });
 
 exports.createHattrick = catchAsyncErrors(async (req, res, next) => {
-  // For nested routes
   if (!req.body.player) req.body.player = req.params.playerId;
   const newHattrick = await Hattrick.create(req.body);
 
@@ -48,22 +46,22 @@ exports.createHattrick = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.updateHattrick = catchAsyncErrors(async (req, res, next) => {
-  const seasonToUpdate = await Season.findOneAndUpdate(
-    { _id: req.params.seasonId },
+  const hattrickToUpdate = await Hattrick.findOneAndUpdate(
+    { _id: req.params.hattrickId },
     req.body,
     { new: true, runValidators: true }
   );
 
-  if (!seasonToUpdate) {
-    return next(new AppError('That Season does not exist!', 404));
+  if (!hattrickToUpdate) {
+    return next(new AppError('That Hat-trick does not exist!', 404));
   }
 
-  await seasonToUpdate.save();
+  await hattrickToUpdate.save();
 
   res.status(200).json({
     status: 'success',
     data: {
-      season: seasonToUpdate,
+      hattrick: hattrickToUpdate,
     },
   });
 });
