@@ -7,7 +7,6 @@ const {
   updatePlayer,
   deletePlayer,
   uploadPhoto,
-  getPlayersWithHattricks,
 } = require('../controllers/playerController');
 
 const upload = require('../middleware/multer');

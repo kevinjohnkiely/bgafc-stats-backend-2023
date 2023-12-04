@@ -18,6 +18,7 @@ const userRouter = require('./routes/userRoutes');
 const seasonRouter = require('./routes/seasonRoutes');
 const hattricksRouter = require('./routes/hattricksRoutes');
 const haulsRouter = require('./routes/haulsRoutes');
+const seasonBySeasonRouter = require('./routes/seasonBySeasonRoutes');
 
 const viewRouter = require('./routes/viewRoutes');
 
@@ -91,6 +92,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
 app.use('/api/v1/hattricks', hattricksRouter);
 app.use('/api/v1/match-hauls', haulsRouter);
+app.use('/api/v1/season-by-season', seasonBySeasonRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
