@@ -1,5 +1,4 @@
 const Hattrick = require('../models/hattricksModel');
-const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 const Player = require('../models/playerModel');

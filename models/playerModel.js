@@ -103,6 +103,12 @@ playerSchema.virtual('hattricks', {
   localField: '_id',
 })
 
+playerSchema.virtual('hauls', {
+  ref: 'Haul',
+  foreignField: 'player',
+  localField: '_id',
+})
+
 const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;
