@@ -6,15 +6,8 @@ const seasonBySeasonSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A season must have a season year! e.g 2022/23'],
     },
-    team: {
-      type: String,
-      enum: ['A', 'B'],
-      required: [true, 'A team must be either A or B!'],
-    },
     division: {
       type: String,
-      enum: ['Prem', '1', '2', '2a', '2b', '3', '3a', '3b', '4'],
-      required: [true, 'A division must be Prem or from 1 to 4!'],
     },
     player: {
       type: mongoose.Schema.ObjectId,
@@ -29,6 +22,9 @@ const seasonBySeasonSchema = new mongoose.Schema(
       type: String,
     },
     totalGoals: {
+      type: String,
+    },
+    note: {
       type: String,
     },
   },

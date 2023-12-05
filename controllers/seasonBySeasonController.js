@@ -26,22 +26,42 @@ exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
 exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
   if (!req.body.player) req.body.player = req.params.playerId;
   const player = await Player.findById(req.body.player).populate('seasons');
-  console.log(player.seasons);
+  // console.log(player.seasons);
 
-  const filteredSeason = player.seasons.filter(
-    (season) =>
-      season.season === req.body.season &&
-      season.team === req.body.team &&
-      season.division === req.body.division
+  const filteredSeasons = player.seasons.filter(
+    (season) => season.season === req.body.season
   );
 
-  if (filteredSeason[0].team === 'A') {
-    req.body.totalGoals = filteredSeason[0].seasonTotalGoalsA;
-    req.body.leagueGoals = filteredSeason[0].lge_goals;
+  console.log('xxxxxxxxxxxxxx');
+  console.log(filteredSeasons);
+
+  let seasonGoals = 0,
+    leagueGoals = 0;
+
+  if (filteredSeasons.length === 2) {
+    if (filteredSeasons[0].seasonTotalGoalsA) {
+      seasonGoals =
+        filteredSeasons[0].seasonTotalGoalsA +
+        filteredSeasons[1].seasonTotalGoalsB;
+    } else {
+      seasonGoals =
+        filteredSeasons[0].seasonTotalGoalsB +
+        filteredSeasons[1].seasonTotalGoalsA;
+    }
+    leagueGoals = filteredSeasons[0].lge_goals + filteredSeasons[1].lge_goals;
   } else {
-    req.body.totalGoals = filteredSeason[0].seasonTotalGoalsB;
-    req.body.leagueGoals = filteredSeason[0].lge_goals;
+    if (filteredSeasons[0].seasonTotalGoalsA) {
+      seasonGoals = filteredSeasons[0].seasonTotalGoalsA;
+    } else {
+      seasonGoals = filteredSeasons[0].seasonTotalGoalsB;
+    }
+    leagueGoals = filteredSeasons[0].lge_goals;
   }
+
+  req.body.totalGoals = seasonGoals;
+  req.body.leagueGoals = leagueGoals;
+  req.body.firstName = player.firstName;
+  req.body.lastName = player.lastName;
 
   const newSeasonBySeason = await SeasonBySeason.create(req.body);
 
