@@ -5,13 +5,6 @@ const calcSeasonBySeasonStats = require('../utils/calcSeasonBySeasonStats');
 
 exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
   async (req, res, next) => {
-    // let players;
-    // if (req.query.sort) {
-    //   players = await Player.find().sort(req.query.sort).populate('seasons');
-    // } else {
-    //   players = await Player.find().sort({ lastName: 1 }).populate('seasons');
-    // }
-
     const sbs = await SeasonBySeason.find();
 
     res.status(200).json({
@@ -36,6 +29,7 @@ exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
 
   req.body.totalGoals = seasonGoals;
   req.body.leagueGoals = leagueGoals;
+  // NEEDS IMPROVING - single source of truth! //
   req.body.firstName = player.firstName;
   req.body.lastName = player.lastName;
 
@@ -59,7 +53,9 @@ exports.deleteSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
   });
 
   if (!sbsToDelete) {
-    return next(new AppError('That Season by Season record does not exist!', 404));
+    return next(
+      new AppError('That Season by Season record does not exist!', 404)
+    );
   }
 
   res.status(204).json({

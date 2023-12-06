@@ -19,6 +19,7 @@ const seasonRouter = require('./routes/seasonRoutes');
 const hattricksRouter = require('./routes/hattricksRoutes');
 const haulsRouter = require('./routes/haulsRoutes');
 const seasonBySeasonRouter = require('./routes/seasonBySeasonRoutes');
+const sharpshootersRouter = require('./routes/sharpshootersRoutes');
 
 const viewRouter = require('./routes/viewRoutes');
 
@@ -90,6 +91,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/players', playerRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/seasons', seasonRouter);
+app.use('/api/v1/sharpshooters', sharpshootersRouter);
 app.use('/api/v1/hattricks', hattricksRouter);
 app.use('/api/v1/match-hauls', haulsRouter);
 app.use('/api/v1/season-by-season', seasonBySeasonRouter);
