@@ -1,6 +1,7 @@
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const SeasonBySeason = require('../models/seasonBySeasonModel');
 const Player = require('../models/playerModel');
+const calcSeasonBySeasonStats = require('../utils/calcSeasonBySeasonStats');
 
 exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
   async (req, res, next) => {
@@ -26,37 +27,12 @@ exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
 exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
   if (!req.body.player) req.body.player = req.params.playerId;
   const player = await Player.findById(req.body.player).populate('seasons');
-  // console.log(player.seasons);
 
   const filteredSeasons = player.seasons.filter(
     (season) => season.season === req.body.season
   );
 
-  console.log('xxxxxxxxxxxxxx');
-  console.log(filteredSeasons);
-
-  let seasonGoals = 0,
-    leagueGoals = 0;
-
-  if (filteredSeasons.length === 2) {
-    if (filteredSeasons[0].seasonTotalGoalsA) {
-      seasonGoals =
-        filteredSeasons[0].seasonTotalGoalsA +
-        filteredSeasons[1].seasonTotalGoalsB;
-    } else {
-      seasonGoals =
-        filteredSeasons[0].seasonTotalGoalsB +
-        filteredSeasons[1].seasonTotalGoalsA;
-    }
-    leagueGoals = filteredSeasons[0].lge_goals + filteredSeasons[1].lge_goals;
-  } else {
-    if (filteredSeasons[0].seasonTotalGoalsA) {
-      seasonGoals = filteredSeasons[0].seasonTotalGoalsA;
-    } else {
-      seasonGoals = filteredSeasons[0].seasonTotalGoalsB;
-    }
-    leagueGoals = filteredSeasons[0].lge_goals;
-  }
+  const { seasonGoals, leagueGoals } = calcSeasonBySeasonStats(filteredSeasons);
 
   req.body.totalGoals = seasonGoals;
   req.body.leagueGoals = leagueGoals;
@@ -70,5 +46,24 @@ exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
     data: {
       season: newSeasonBySeason,
     },
+  });
+});
+
+exports.updateSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
+  // MAY BE ADDED LATER - little use for this function as application stands.
+});
+
+exports.deleteSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
+  const sbsToDelete = await SeasonBySeason.findOneAndDelete({
+    _id: req.params.sbsId,
+  });
+
+  if (!sbsToDelete) {
+    return next(new AppError('That Season by Season record does not exist!', 404));
+  }
+
+  res.status(204).json({
+    status: 'Success',
+    data: null,
   });
 });

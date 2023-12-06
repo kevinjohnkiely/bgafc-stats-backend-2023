@@ -17,6 +17,6 @@ router.route('/').get(getPlayersWithHattricks).post(protect, createHattrick);
 router
   .route('/:hattrickId')
   .patch(protect, updateHattrick)
-  .delete(deleteHattrick);
+  .delete(protect, deleteHattrick);
 
 module.exports = router;
