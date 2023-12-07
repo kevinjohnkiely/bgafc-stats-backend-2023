@@ -5,7 +5,7 @@ const calcSeasonBySeasonStats = require('../utils/calcSeasonBySeasonStats');
 
 exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
   async (req, res, next) => {
-    const sbs = await SeasonBySeason.find();
+    const sbs = await SeasonBySeason.find().populate('sbs');
 
     res.status(200).json({
       status: 'success',
@@ -29,9 +29,6 @@ exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
 
   req.body.totalGoals = seasonGoals;
   req.body.leagueGoals = leagueGoals;
-  // NEEDS IMPROVING - single source of truth! //
-  req.body.firstName = player.firstName;
-  req.body.lastName = player.lastName;
 
   const newSeasonBySeason = await SeasonBySeason.create(req.body);
 

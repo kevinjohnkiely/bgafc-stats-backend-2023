@@ -83,6 +83,10 @@ const playerSchema = new mongoose.Schema(
     totalGoals: {
       type: Number,
     },
+    sbs: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'SeasonBySeason',
+    },
   },
   {
     toJSON: { virtuals: true },

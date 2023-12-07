@@ -14,10 +14,6 @@ const seasonBySeasonSchema = new mongoose.Schema(
       ref: 'Player',
       required: [true, 'Season by season entry must belong to a player'],
     },
-    firstName: {
-      type: String,
-    },
-    lastName: { type: String },
     leagueGoals: {
       type: String,
     },
@@ -33,6 +29,13 @@ const seasonBySeasonSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+// Virtual populates
+seasonBySeasonSchema.virtual('sbs', {
+  ref: 'Player',
+  foreignField: '_id',
+  localField: 'player',
+});
 
 const SeasonBySeason = mongoose.model('SeasonBySeason', seasonBySeasonSchema);
 
