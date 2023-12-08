@@ -14,11 +14,9 @@ const seasonBySeasonSchema = new mongoose.Schema(
       ref: 'Player',
       required: [true, 'Season by season entry must belong to a player'],
     },
-    leagueGoals: {
-      type: String,
-    },
-    totalGoals: {
-      type: String,
+    seasonRef: {
+      type: [mongoose.Schema.ObjectId],
+      ref: 'Season',
     },
     note: {
       type: String,

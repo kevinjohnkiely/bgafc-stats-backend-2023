@@ -1,6 +1,7 @@
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 const Player = require('../models/playerModel');
+const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
@@ -91,6 +92,8 @@ exports.deletePlayer = catchAsyncErrors(async (req, res, next) => {
   const playerToDelete = await Player.findOneAndDelete({
     slug: req.params.playerSlug,
   });
+
+  await Season.deleteMany({ player: playerToDelete._id });
 
   if (!playerToDelete) {
     return next(new AppError('That Player does not exist!', 404));

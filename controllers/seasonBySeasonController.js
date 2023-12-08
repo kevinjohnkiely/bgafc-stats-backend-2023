@@ -1,7 +1,7 @@
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const SeasonBySeason = require('../models/seasonBySeasonModel');
 const Player = require('../models/playerModel');
-const calcSeasonBySeasonStats = require('../utils/calcSeasonBySeasonStats');
+const populateSeasonIds = require('../utils/calcSeasonBySeasonStats');
 
 exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
   async (req, res, next) => {
@@ -25,10 +25,11 @@ exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
     (season) => season.season === req.body.season
   );
 
-  const { seasonGoals, leagueGoals } = calcSeasonBySeasonStats(filteredSeasons);
+  const result = populateSeasonIds(filteredSeasons);
 
-  req.body.totalGoals = seasonGoals;
-  req.body.leagueGoals = leagueGoals;
+  // req.body.totalGoals = seasonGoals;
+  // req.body.leagueGoals = leagueGoals;
+  req.body.seasonRef = result;
 
   const newSeasonBySeason = await SeasonBySeason.create(req.body);
 

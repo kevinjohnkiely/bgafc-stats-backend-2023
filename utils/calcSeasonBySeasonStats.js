@@ -1,31 +1,6 @@
-const calcSeasonBySeasonStats = (seasons) => {
-  //   const filteredSeasons = player.seasons.filter(
-  //     (season) => season.season === req.body.season
-  //   );
-
-  let seasonGoals = 0,
-    leagueGoals = 0;
-
-  if (seasons.length === 2) {
-    if (seasons[0].seasonTotalGoalsA) {
-      seasonGoals = seasons[0].seasonTotalGoalsA + seasons[1].seasonTotalGoalsB;
-    } else {
-      seasonGoals = seasons[0].seasonTotalGoalsB + seasons[1].seasonTotalGoalsA;
-    }
-    leagueGoals = seasons[0].lge_goals + seasons[1].lge_goals;
-  } else {
-    if (seasons[0].seasonTotalGoalsA) {
-      seasonGoals = seasons[0].seasonTotalGoalsA;
-    } else {
-      seasonGoals = seasons[0].seasonTotalGoalsB;
-    }
-    leagueGoals = seasons[0].lge_goals;
-  }
-
-  return {
-    seasonGoals,
-    leagueGoals,
-  };
+const populateSeasonIds = (seasons) => {
+  // this now has to return array of one or two season ids
+  return ['6481c9d0e0cbfe5360a90a06', '6481ca14e0cbfe5360a90a1c'];
 };
 
-module.exports = calcSeasonBySeasonStats;
+module.exports = populateSeasonIds;

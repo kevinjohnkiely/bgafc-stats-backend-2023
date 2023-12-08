@@ -2,6 +2,19 @@ const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
+// THIS ROUTE FOR TESTING PURPOSES ONLY
+exports.getAllSeasons = catchAsyncErrors(async (req, res, next) => {
+  const allSeasons = await Season.find();
+
+  res.status(200).json({
+    status: 'success',
+    numOfSeasons: allSeasons.length,
+    data: {
+      allSeasons,
+    },
+  });
+});
+
 exports.getSeasonsByPlayer = catchAsyncErrors(async (req, res, next) => {
   const seasons = await Season.find({ player: req.params.playerId });
 
