@@ -7,6 +7,11 @@ const ssSchema = new mongoose.Schema({
   pics: {
     type: [String],
   },
+  player: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Player',
+    required: [true, 'Player must belong to a Sharpshooter record!'],
+  },
 });
 
 const Sharpshooter = mongoose.model('Sharpshooter', ssSchema);
