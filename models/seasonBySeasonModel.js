@@ -29,10 +29,16 @@ const seasonBySeasonSchema = new mongoose.Schema(
 );
 
 // Virtual populates
-seasonBySeasonSchema.virtual('sbs', {
+seasonBySeasonSchema.virtual('sbs_player_info', {
   ref: 'Player',
   foreignField: '_id',
   localField: 'player',
+});
+
+seasonBySeasonSchema.virtual('season_info', {
+  ref: 'Season',
+  foreignField: '_id',
+  localField: 'seasonRef',
 });
 
 const SeasonBySeason = mongoose.model('SeasonBySeason', seasonBySeasonSchema);

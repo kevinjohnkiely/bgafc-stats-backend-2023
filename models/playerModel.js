@@ -83,7 +83,7 @@ const playerSchema = new mongoose.Schema(
     totalGoals: {
       type: Number,
     },
-    sbs: {
+    sbs_player_info: {
       type: mongoose.Schema.ObjectId,
       ref: 'SeasonBySeason',
     },

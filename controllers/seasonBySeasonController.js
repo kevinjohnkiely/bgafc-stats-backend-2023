@@ -1,11 +1,10 @@
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const SeasonBySeason = require('../models/seasonBySeasonModel');
 const Player = require('../models/playerModel');
-const populateSeasonIds = require('../utils/calcSeasonBySeasonStats');
 
 exports.getSeasonBySeasonTopScorers = catchAsyncErrors(
   async (req, res, next) => {
-    const sbs = await SeasonBySeason.find().populate('sbs');
+    const sbs = await SeasonBySeason.find().populate('sbs_player_info').populate('season_info');
 
     res.status(200).json({
       status: 'success',
@@ -25,11 +24,7 @@ exports.createSeasonBySeason = catchAsyncErrors(async (req, res, next) => {
     (season) => season.season === req.body.season
   );
 
-  const result = populateSeasonIds(filteredSeasons);
-
-  // req.body.totalGoals = seasonGoals;
-  // req.body.leagueGoals = leagueGoals;
-  req.body.seasonRef = result;
+  req.body.seasonRef = filteredSeasons;
 
   const newSeasonBySeason = await SeasonBySeason.create(req.body);
 

@@ -98,6 +98,10 @@ const seasonSchema = new mongoose.Schema(
       ref: 'Player',
       required: [true, 'Season must belong to a player'],
     },
+    sbs: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'SeasonBySeason',
+    },
   },
   {
     toJSON: { virtuals: true },
