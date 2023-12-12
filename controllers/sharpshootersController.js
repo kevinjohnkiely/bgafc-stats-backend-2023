@@ -37,7 +37,7 @@ exports.getOneSharpshooter = catchAsyncErrors(async (req, res, next) => {
   if (!player) {
     return next(new AppError('That Player does not exist!', 404));
   }
-
+  // TODO : if ss is blank, don't return anything (currently returning player)
   const ss = await Sharpshooter.findOne({ player: player._id });
 
   res.status(200).json({
@@ -46,5 +46,45 @@ exports.getOneSharpshooter = catchAsyncErrors(async (req, res, next) => {
       player: player,
       ss: ss,
     },
+  });
+});
+
+exports.updateOneSharpshooter = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findOne({ slug: req.params.playerSlug });
+
+  if (!player) {
+    return next(new AppError('That Player does not exist!', 404));
+  }
+
+  const updatedSS = await Sharpshooter.findOneAndUpdate(
+    { player: player._id },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  await updatedSS.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      ss: updatedSS,
+    },
+  });
+});
+
+exports.deleteOneSharpshooter = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findOne({ slug: req.params.playerSlug });
+
+  if (!player) {
+    return next(new AppError('That Player does not exist!', 404));
+  }
+
+  const ssToDelete = await Sharpshooter.findOneAndDelete({
+    player: player._id,
+  });
+
+  res.status(204).json({
+    status: 'Success',
+    data: null,
   });
 });
