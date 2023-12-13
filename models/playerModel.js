@@ -87,6 +87,10 @@ const playerSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: 'SeasonBySeason',
     },
+    // the200_player_info: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: 'the200Club',
+    // },
   },
   {
     toJSON: { virtuals: true },
@@ -105,12 +109,18 @@ playerSchema.virtual('hattricks', {
   ref: 'Hattrick',
   foreignField: 'player',
   localField: '_id',
-})
+});
 
 playerSchema.virtual('hauls', {
   ref: 'Haul',
   foreignField: 'player',
   localField: '_id',
+});
+
+playerSchema.virtual('the200Club', {
+  ref: 'the200Club',
+  foreignField: 'player',
+  localField: '_id'
 })
 
 const Player = mongoose.model('Player', playerSchema);

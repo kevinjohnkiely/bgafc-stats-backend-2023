@@ -20,6 +20,7 @@ const hattricksRouter = require('./routes/hattricksRoutes');
 const haulsRouter = require('./routes/haulsRoutes');
 const seasonBySeasonRouter = require('./routes/seasonBySeasonRoutes');
 const sharpshootersRouter = require('./routes/sharpshootersRoutes');
+const the200clubRouter = require('./routes/200clubRoutes');
 
 const viewRouter = require('./routes/viewRoutes');
 
@@ -88,13 +89,16 @@ app.use((req, res, next) => {
 // MOUNTING THE ROUTES
 app.use('/', viewRouter);
 
-app.use('/api/v1/players', playerRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/seasons', seasonRouter);
-app.use('/api/v1/sharpshooters', sharpshootersRouter);
-app.use('/api/v1/hattricks', hattricksRouter);
-app.use('/api/v1/match-hauls', haulsRouter);
-app.use('/api/v1/season-by-season', seasonBySeasonRouter);
+const apiURL = '/api/v1/';
+
+app.use(`${apiURL}players`, playerRouter);
+app.use(`${apiURL}users`, userRouter);
+app.use(`${apiURL}seasons`, seasonRouter);
+app.use(`${apiURL}sharpshooters`, sharpshootersRouter);
+app.use(`${apiURL}hattricks`, hattricksRouter);
+app.use(`${apiURL}match-hauls`, haulsRouter);
+app.use(`${apiURL}season-by-season`, seasonBySeasonRouter);
+app.use(`${apiURL}200club`, the200clubRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 404));
