@@ -6,9 +6,9 @@ const seasonBySeasonSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A season must have a season year! e.g 2022/23'],
     },
-    division: {
-      type: String,
-    },
+    // division: {
+    //   type: String,
+    // },
     player: {
       type: mongoose.Schema.ObjectId,
       ref: 'Player',
