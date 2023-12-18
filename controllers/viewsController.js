@@ -4,12 +4,8 @@ const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
 exports.getPlayers = catchAsyncErrors(async (req, res, next) => {
-  // 1 - get players data
-  const players = await Player.find().sort({ lastName: 1 });;
+  const players = await Player.find().sort({ lastName: 1 });
 
-  // 2 - build template
-
-  // 3 - render template using player data from step 1
   res.status(200).render('players', {
     title: 'All Players',
     players,
@@ -114,6 +110,24 @@ exports.updateSeason = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// SHARPSHOOTERS
+exports.getSharpshooters = catchAsyncErrors(async (req, res, next) => {
+  const ssPlayers = await Player.find({
+    totalGoals: { $gte: 50 },
+  }).sort({ totalGoals: -1 });
+
+  res.status(200).render('sharpshooters', {
+    title: 'Sharpshooters',
+    ssPlayers,
+  });
+});
+
+exports.addSharpshooter = catchAsyncErrors(async (req, res, next) => {
+  res.status(200).render('addsharpshooter', {
+    title: 'Add New Sharpshooter',
+  });
+});
+
 // HAT-TRICKS
 exports.addHattrick = catchAsyncErrors(async (req, res, next) => {
   const player = await Player.findById(req.params.playerId);
@@ -124,7 +138,7 @@ exports.addHattrick = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).render('addseason', {
     title: `Add Hat-trick for Player: ${player.firstName} ${player.lastName}`,
-    player
+    player,
   });
 });
 

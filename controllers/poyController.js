@@ -2,7 +2,7 @@ const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const POY = require('../models/poyModel');
 
 exports.getPOY = catchAsyncErrors(async (req, res, next) => {
-  const poys = await POY.find();
+  const poys = await POY.find().populate('poy_player_info');
 
   res.status(200).json({
     status: 'success',
@@ -63,3 +63,4 @@ exports.deletePOY = catchAsyncErrors(async (req, res, next) => {
     data: null,
   });
 });
+

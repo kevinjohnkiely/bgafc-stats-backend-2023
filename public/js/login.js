@@ -18,8 +18,8 @@ const login = async (username, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'https://ballingarryafcstats.cyclic.cloud/api/v1/users/login',
       // url: 'https://ballingarryafcstats.cyclic.cloud/api/v1/users/login',
+      url: 'http://localhost:1984/api/v1/users/login',
       data: {
         username,
         password,

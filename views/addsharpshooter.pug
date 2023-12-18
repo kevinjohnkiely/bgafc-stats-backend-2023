@@ -1,0 +1,57 @@
+extends base
+
+block content 
+    .container-fluid 
+        h3.page-heading Add a Sharpshooter
+        form(style="width: 80%; margin: auto").add-player-form
+            .row
+                .col-md-4.col-sm-12
+                    .mb-3 
+                        label.form-label(for='firstName') First Name: 
+                        input.form-control(type='text' id='firstName' required)
+                .col-md-4.col-sm-12
+                    .mb-3 
+                        label.form-label(for='lastName') Last Name: 
+                        input.form-control(type='text' id='lastName' required)
+                .col-md-4.col-sm-12
+                    .mb-3
+                        label.form-label(for='slug') Player Slug: 
+                        input.form-control(type='text' id='slug' disabled)
+            .row 
+                .col-md-6.col-sm-12 
+                    .mb-3 
+                        label.form-label(for='dateOfBirth') Date of Birth: 
+                        input.form-control(type='text' id='dateOfBirth')
+                .col-md-6.col-sm-12 
+                    .mb-3 
+                        label.form-label(for='position') Position: 
+                        select.form-control(name='position' id='position' required)
+                            option(value='Goalkeeper') Goalkeeper
+                            option(value='Defender') Defender
+                            option(value='Left Full Back') Left Full Back
+                            option(value='Right Full Back') Right Full Back
+                            option(value='Centre Half') Centre Half
+                            option(value='Utilty') Utilty
+                            option(value='Midfield') Midfield
+                            option(value='Winger') Winger
+                            option(value='Striker') Striker
+                            option(value='Forward') Forward
+                            option(value='') (to follow...)
+            .row 
+                .col-md-6.col-sm-12 
+                    .mb-3 
+                        label.form-label(for='debut') Debut: 
+                        input.form-control(type='text' id='debut')
+                .col-md-6.col-sm-12 
+                    .mb-3 
+                        label.form-label(for='firstGoal') First Goal: 
+                        input.form-control(type='text' id='firstGoal')
+            .row 
+                .col 
+                    .mb-3 
+                        label.form-label(for='honours') Honours: 
+                        textarea.form-control(id='honours' rows="3")
+            .text-center
+                button.btn.btn-success.btn-lg(type='submit') Add Sharpshooter
+                a.btn.btn-outline-danger.btn-lg(href='/' role="button" style="margin-left: 0.7rem") Go Back
+    script(src="/js/addSharpshooter.js") 

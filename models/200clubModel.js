@@ -20,13 +20,6 @@ const the200clubSchema = new mongoose.Schema(
   }
 );
 
-// Virtual populates
-// the200clubSchema.virtual('the200_player_info', {
-//   ref: 'Player',
-//   foreignField: '_id',
-//   localField: 'player',
-// });
-
 const the200Club = mongoose.model('the200Club', the200clubSchema);
 
 module.exports = the200Club;

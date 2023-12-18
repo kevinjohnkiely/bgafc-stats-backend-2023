@@ -48,6 +48,13 @@ const poySchema = new mongoose.Schema(
   }
 );
 
+// Virtual populates
+poySchema.virtual('poy_player_info', {
+  ref: 'Player',
+  foreignField: '_id',
+  localField: 'player',
+});
+
 const POY = mongoose.model('POY', poySchema);
 
 module.exports = POY;

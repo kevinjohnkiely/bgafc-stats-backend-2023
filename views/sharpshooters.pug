@@ -1,0 +1,50 @@
+extends base
+
+block content
+    .container-fluid 
+        h3.page-heading Sharpshooters
+        h5.page-subheading Ballingarry AFC Players who have scored 50+ goals
+        p The most precious commodity in football is goals. Ballingarry AFC recognises the art that is goalscoring in their players and present players who score 50 competitive goals for the club with an award. Likewise when a player hits the “Ton”, the club also makes a presentation to commemorate the achievement.
+        p= `${ssPlayers.length} players have hit the 50 and the 100 goal milestones for Ballingarry AFC and only goals scored during competitive games are recorded:`  
+        table.table.table-bordered.table-hover.player-table
+            thead
+                tr 
+                    th(style="line-height: 2.2rem;") #
+                    th(style="width: 50%; line-height: 2.2rem; text-align:left") Player Name
+                    th(style="line-height: 2.2rem;") A Team Goals
+                    th(style="line-height: 2.2rem;") B Team Goals
+                    th(style="line-height: 2.2rem;") Total Goals
+            tbody 
+                if ssPlayers.length === 0
+                    h4(style='text-align:center; color: red') No Sharpshooters found! Try again.
+                each player in ssPlayers
+                    tr
+                        td= ssPlayers.indexOf(player) + 1
+                        td(style='text-align:left') 
+                            a(href=`/players/${player.slug}`)
+                                strong= `${player.lastName.toUpperCase()}, `
+                                span= player.firstName
+                            if user
+                                span.player-btns 
+                                    i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; font-size: 1.3rem')
+                                    i.fa-solid.fa-pen-to-square.edit-player(data-slug=`${player.slug}`, style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
+                        td= player.aTeamGoals
+                        td= player.bTeamGoals
+                        td
+                            strong= player.totalGoals
+        if user
+            .text-center    
+                a.btn.btn-success(href='/addsharpshooter' role="button" style="margin-top: 1rem") Add Sharpshooter
+        .modal.delete-player-modal
+            .modal-dialog
+                .modal-content 
+                    .modal-header 
+                        h5.modal-title Delete Sharpshooter
+                    .modal-body 
+                        p Are you sure you want to delete this sharpshooter?
+                    .modal-footer 
+                        button.btn.btn-danger.delete-player-btn Yes, Delete! 
+                        button.btn.btn-primary.cancel-delete-player Cancel
+    script(src="/js/deletePlayer.js") 
+    script(src="/js/searchPlayers.js") 
+                    
