@@ -2,11 +2,12 @@ header.page-margin-top
     a(href='/')
         img.img-fluid.header-img-full-width(src='/img/header.jpg' alt='Ballingarry AFC stats 1984 - Present')
     if user
-        nav.navbar.bg-body-secondary
+        nav.navbar.navbar-expand-lg.bg-body-secondary
             .container-fluid 
                 a.navbar-brand You are logged in, 
                     span=user.username
-                ul.navbar-nav 
-                    li.nav-item.logout-user 
-                        //- a.nav-link(href='/logout') Logout
+                ul.navbar-nav.mr-auto
+                    li.nav-item
+                        a.btn.btn-success(href='/dashboard' role='button') Dashboard
+                    li.nav-item.logout-user(style="margin-left: 0.6rem;") 
                         a.btn.btn-danger(href='/logout' role="button") Logout

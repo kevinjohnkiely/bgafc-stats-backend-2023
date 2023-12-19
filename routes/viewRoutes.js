@@ -1,5 +1,6 @@
 const express = require('express');
 const {
+  getDashboard,
   getPlayers,
   getPlayersSorted,
   getPlayersSearch,
@@ -14,11 +15,16 @@ const {
   addHattrick,
   getSharpshooters,
   addSharpshooter,
+  getPlayersDashSearch,
 } = require('../controllers/viewsController');
 const { protect } = require('../middleware/auth');
 const { isLoggedIn } = require('../middleware/isLoggedIn');
 
 const router = express.Router();
+
+// DASHBOARD
+router.get('/dashboard', isLoggedIn, getDashboard);
+router.get('/dashboard/search/:term', isLoggedIn, getPlayersDashSearch);
 
 // PLAYERS
 router.get('/', isLoggedIn, getPlayers);

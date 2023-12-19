@@ -3,6 +3,29 @@ const Season = require('../models/seasonModel');
 const catchAsyncErrors = require('../utils/catchAsyncErrors');
 const AppError = require('../utils/errorHandling/appError');
 
+// DASHBOARD
+exports.getDashboard = catchAsyncErrors(async (req, res, next) => {
+  const players = await Player.find().sort({ lastName: 1 });
+
+  res.status(200).render('dashboard', {
+    title: 'All Players',
+    players,
+  });
+});
+
+exports.getPlayersDashSearch = catchAsyncErrors(async (req, res, next) => {
+  // db.collection.find({name:{'$regex' : req.params.term, '$options' : 'i'}})
+  const players = await Player.find({
+    lastName: { $regex: req.params.term, $options: 'i' },
+  });
+
+  res.status(200).render('dashboard', {
+    title: 'All Players',
+    players,
+  });
+});
+
+// PLAYERS
 exports.getPlayers = catchAsyncErrors(async (req, res, next) => {
   const players = await Player.find().sort({ lastName: 1 });
 
