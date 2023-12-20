@@ -21,7 +21,7 @@ const deleteSeason = async (seasonId) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/seasons/${seasonId}`,
+      url: `http://localhost:1984/api/v1/seasons/${seasonId}`,
     });
 
     showDeleteSeasonAlert('success', 'Season deleted!');
@@ -51,7 +51,7 @@ if (editSeasonBtns) {
   editSeasonBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       location.assign(
-        `https://ballingarryafcstats.cyclic.cloud/seasons/${btn.dataset.season}/edit/${btn.dataset.player}`
+        `http://localhost:1984/seasons/${btn.dataset.season}/edit/${btn.dataset.player}`
       );
     });
   });

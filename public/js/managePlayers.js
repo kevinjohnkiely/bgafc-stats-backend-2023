@@ -16,12 +16,13 @@ const editPlayerBtns = document.querySelectorAll('.edit-player');
 const deletePlayerModal = document.querySelector('.delete-player-modal');
 const cancelDeletePlayer = document.querySelector('.cancel-delete-player');
 const deletePlayerBtn = document.querySelector('.delete-player-btn');
+const addSSBtns = document.querySelectorAll('.add-ss');
 
 const deletePlayer = async (slug) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${slug}`,
+      url: `http://localhost:1984/api/v1/players/${slug}`,
     });
 
     showDeletePlayerAlert('success', 'Player deleted!');
@@ -50,9 +51,16 @@ if (editPlayerBtns) {
   editPlayerBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       console.log(btn.dataset.slug);
-      location.assign(
-        `https://ballingarryafcstats.cyclic.cloud/players/${btn.dataset.slug}/edit`
-      );
+      location.assign(`http://localhost:1984/players/${btn.dataset.slug}/edit`);
+    });
+  });
+}
+
+if (addSSBtns) {
+  addSSBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      console.log(btn.dataset.slug);
+      location.assign(`http://localhost:1984/addsharpshooter/${btn.dataset.slug}`);
     });
   });
 }

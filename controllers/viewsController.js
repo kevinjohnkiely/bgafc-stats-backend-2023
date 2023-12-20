@@ -146,8 +146,15 @@ exports.getSharpshooters = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.addSharpshooter = catchAsyncErrors(async (req, res, next) => {
+  const player = await Player.findOne({ slug: req.params.playerSlug });
+
+  if (!player) {
+    return next(new AppError('There is no player under that ID number!', 404));
+  }
+
   res.status(200).render('addsharpshooter', {
     title: 'Add New Sharpshooter',
+    player,
   });
 });
 

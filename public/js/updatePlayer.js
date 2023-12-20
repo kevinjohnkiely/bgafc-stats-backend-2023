@@ -19,7 +19,7 @@ const updatePlayer = async (playerData) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${slugDataItem.dataset.slug}`,
+      url: `http://localhost:1984/api/v1/players/${slugDataItem.dataset.slug}`,
       data: playerData,
     });
     console.log(res.data);

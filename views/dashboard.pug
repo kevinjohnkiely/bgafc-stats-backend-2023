@@ -36,8 +36,8 @@ block content
                                 span= player.firstName
                             if user
                                 span.player-btns 
-                                    i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; font-size: 1.3rem')
-                                    i.fa-solid.fa-pen-to-square.edit-player(data-slug=`${player.slug}`, style='margin-left: 0.7rem; color:green; font-size: 1.3rem')
+                                    i.fa-solid.fa-circle-xmark.delete-player(data-slug=`${player.slug}`, style='color:red; cursor:pointer; font-size: 1.3rem')
+                                    i.fa-solid.fa-pen-to-square.edit-player(data-slug=`${player.slug}`, style='margin-left: 0.7rem; color:green; cursor:pointer; font-size: 1.3rem')
                         td
                             i.fa-solid.fa-circle-plus.add-ss(data-slug=`${player.slug}`, style='color:green; cursor:pointer; font-size: 1.3rem')
                         td
@@ -61,6 +61,6 @@ block content
                     .modal-footer 
                         button.btn.btn-danger.delete-player-btn Yes, Delete! 
                         button.btn.btn-primary.cancel-delete-player Cancel
-    script(src="/js/deletePlayer.js") 
+    script(src="/js/managePlayers.js") 
     script(src="/js/searchDashboard.js") 
                     

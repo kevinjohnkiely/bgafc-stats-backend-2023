@@ -45,7 +45,7 @@ router.get('/seasons/:seasonId/edit/:playerSlug', protect, updateSeason);
 
 // SHARPSHOOTERS
 router.get('/sharpshooters', isLoggedIn, getSharpshooters);
-router.get('/addsharpshooter', protect, addSharpshooter);
+router.get('/addsharpshooter/:playerSlug', protect, addSharpshooter);
 
 router.get('/addhattrick/:playerId', protect, addHattrick);
 

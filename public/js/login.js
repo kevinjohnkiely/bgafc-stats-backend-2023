@@ -18,7 +18,7 @@ const login = async (username, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      // url: 'https://ballingarryafcstats.cyclic.cloud/api/v1/users/login',
+      // url: 'http://localhost:1984/api/v1/users/login',
       url: 'http://localhost:1984/api/v1/users/login',
       data: {
         username,
@@ -50,7 +50,7 @@ const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'https://ballingarryafcstats.cyclic.cloud/api/v1/users/logout',
+      url: 'http://localhost:1984/api/v1/users/logout',
     });
     if ((res.data.status = 'success')) {
       // location.reload(true);

@@ -2,7 +2,7 @@ extends base
 
 block content 
     .container-fluid 
-        h3.page-heading Add a Sharpshooter
+        h3.page-heading= `Add Sharpshooter entry for ${player.firstName} ${player.lastName}`
         form(style="width: 80%; margin: auto").add-player-form
             .row
                 .col-md-4.col-sm-12

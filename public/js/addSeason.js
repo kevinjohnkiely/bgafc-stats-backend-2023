@@ -20,7 +20,7 @@ const addSeason = async (seasonData) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/${seasonPlayerId.dataset.playerid}/seasons`,
+      url: `http://localhost:1984/api/v1/players/${seasonPlayerId.dataset.playerid}/seasons`,
       data: seasonData,
     });
 

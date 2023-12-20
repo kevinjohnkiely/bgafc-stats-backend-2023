@@ -18,13 +18,13 @@ const addPhoto = async (photoData) => {
   try {
     // const res = await axios({
     //   method: 'POST',
-    //   url: `https://ballingarryafcstats.cyclic.cloud/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+    //   url: `http://localhost:1984/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
     //   data: photoData,
     // });
-    // https://ballingarryafcstats.cyclic.cloud/api/v1/players
+    // http://localhost:1984/api/v1/players
 
     const res = await fetch(
-      `https://ballingarryafcstats.cyclic.cloud/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
+      `http://localhost:1984/api/v1/players/uploadphoto/${slugDataItem.dataset.slug}`,
       {
         method: 'POST',
         body: JSON.stringify({
